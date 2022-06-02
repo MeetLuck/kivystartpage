@@ -13,11 +13,11 @@ Window.size = 300,120
 #kvfile = join(dirname(__file__),'mycalendar.kv')
 
 class MyButton(Button):
-    background_normal = ''
     def __init__(self, color = (0,0,0,1),background_color=(0.8,0.8,0.8,0), **kwargs):
         super().__init__(**kwargs)
         self.color = color
         self.background_color = background_color
+        self.background_normal = ''
 
 class MyCalendar(BoxLayout):
 
@@ -63,12 +63,13 @@ class MyCalendar(BoxLayout):
 
     def create_weekdays(self):
         for col,weekday in enumerate('SUN MON TUS WED THU FRI SAT'.split()):
-            button = MyButton(text=weekday)
+            button = Button(text=weekday)
             button.font_size = 12
-            button.background_color = 0.95,0.95,0.95,1
-            if weekday == 'SUN':   button.color = 1,0,0,0.7
-            elif weekday == 'SAT': button.color = 0,0,1,0.7
-            else:                  button.color = 0,0,0,0.7
+            button.background_color = 0.6,0.6,0.6,1
+            button.background_normal=''
+            if weekday == 'SUN':   button.color = 1,0,0,1
+            elif weekday == 'SAT': button.color = 0,0,1,1
+            else:                  button.color = 0,0,0,1
             self.rightgrid.add_widget(button)
 
     def create_dates(self):

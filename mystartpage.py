@@ -1,5 +1,7 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.gridlayout import MDGridLayout
+from kivymd.uix.label import Label
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.uix.label import MDLabel
 from kivy.app import App
@@ -9,10 +11,24 @@ from mycal.mycalendar import MyCalendar
 from functools import partial
 from starthelp.starthelp import *
 from kivy.config import Config
-Config.set('graphics', 'kivy', '["Arial", "C:/Windows/Fonts/arial.ttf", "C:/Windows/Fonts/ariali.ttf", "C:/Windows/Fonts/arialbd.ttf", "C:/Windows/Fonts/arialbi.ttf"]')
-#or this 
+Config.set('graphics', 'kivy', ["바탕보통", r'C:\Windows\Fonts\batang.ttc'])
 
 Window.size = 1000,800
+
+
+def update_offworkers(root,date):
+    from datetime import datetime,timedelta
+    parent = root.ids['id_offworkers']
+    offgrid = MDGridLayout(cols=4)
+    label1 = Label(text='label1',color=[0,0,1,1])
+    label2 = Label(text='label2',color=[0,0,0,1])
+    label3 = Label(text='label3',color=[0,0,0,1])
+    label4 = Label(text='label4',color=[0,0,0,1])
+    offgrid.add_widget(label1)
+    offgrid.add_widget(label2)
+    offgrid.add_widget(label3)
+    offgrid.add_widget(label4)
+    parent.add_widget(offgrid)
 
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
@@ -27,27 +43,12 @@ class Mystartpage(MDApp):
             btn = mycal.ids[id]
             btn.bind(on_release=partial(self.on_release,mycal))
         self.date = mycal.date
-        self.add_offworkers()
+        update_offworkers(self.root,self.date)
         return  self.root
-
-    def add_offworkers(self):
-        from datetime import datetime,timedelta
-        off_box = self.root.ids['id_offworkers']
-        print(self.date)
-        date = datetime(*self.date)
-        off_day1 = get_offworkers(date)
-        off_day2 = get_offworkers(date + timedelta(days=1))
-        off_day3 = get_offworkers(date + timedelta(days=2))
-        off_day4 = get_offworkers(date + timedelta(days=3))
-        print(off_day1)
-        off_box.add_widget(MDLabel(text=' '.join(off_day1),pos_hint={'center_x':0.8,'center_y':0.5}))
-        #off_box.add_widget(MDLabel(text=off_day2,pos_hint={'center_x':0.5,'center_y':0.5}))
-        #off_box.add_widget(MDLabel(text=off_day3,pos_hint={'center_x':0.5,'center_y':0.5}))
-        #off_box.add_widget(MDLabel(text=off_day4,pos_hint={'center_x':0.5,'center_y':0.5}))
-
 
     def on_release(self,mycal,btn):
         self.date = mycal.date
+        update_offworkers(self.root,self.date)
 
 
 

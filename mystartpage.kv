@@ -1,51 +1,66 @@
 <MyStartBox@MDBoxLayout>:
     orientation: 'vertical'
-    padding: 2
-    spacing: 2
-    md_bg_color: 0,1,0,1
-<TopBox@MDBoxLayout>:
+    padding: 10
+    spacing: 10
+    md_bg_color: 0.5,0.5,0.5,0
+<TopBox@BoxLayout>:
     orientation: 'horizontal'
-    padding: 2
-    spacing: 1
-    md_bg_color: 0,0,1,0.5
+    padding: 10
+    spacing: 10
+    #md_bg_color: 0,0,1,0.5
     size_hint: 1, 0.7
-<BottomBox@MDBoxLayout>:
+<BottomBox@BoxLayout>:
     orientation: 'vertical'
-    padding: 2
-    spacing: 1
-    md_bg_color: 1,0,0,0.5
+    padding: 10
+    spacing: 10
+    #md_bg_color: 1,0,0,0.5
     size_hint: 1, 0.3
-<TopLeftBox@MDBoxLayout>:
+<TopLeftBox@BoxLayout>:
     orientation: 'vertical'
-    padding: 2
-    spacing: 1
-    md_bg_color: 0,0,0.5,0.5
+    padding: 10
+    spacing: 10
+    #md_bg_color: 0,0,0.5,0.5
     size_hint: 0.7, 1
-<TopRightBox@MDBoxLayout>:
+<TopRightBox@BoxLayout>:
     orientation: 'vertical'
-    padding: 2
-    spacing: 1
-    md_bg_color: 0,0,0.7,0.5
+    padding: 10
+    spacing: 10
+    #md_bg_color: 0,0,0.7,0.5
     size_hint: 0.3, 1
-
+<MyLabel@Label>
+    color:0,0,0,1
+    bold:True
+    markup:True
+    font_size: 14
+    size: self.texture_size
+    halign: 'left'
 
 <MyStartBox>:
     TopBox:
         TopLeftBox:
             MDBoxLayout:
                 orientation:'horizontal'
-                #md_bg_color: 0,0,0,0.1
-                size_hint: 1, 0.35
+                md_bg_color: 0,0,0,0.1
+                size_hint: 1, 0.25
+                padding: 5
+                spacing: 0
                 MyCalendar:
                     id: id_mycal
                     size_hint: 0.4,1
+                    #pos_hint:{'center_x':0.1,'center_y':0.45}
                 MDBoxLayout:
                     id: id_offworkers
+                    spacing: 0
                     size_hint: 0.6,1
                     orientation: 'vertical'
+                    md_bg_color: 1,1,1,1
+                    padding:0
+                    spacing:0
+
+
             MDBoxLayout:
                 orientation:'vertical'
-                size_hint: 1, 0.65
+                size_hint: 1, 0.75
                 md_bg_color: 0,0.5,0,1
         TopRightBox: # Top Right Box
         
