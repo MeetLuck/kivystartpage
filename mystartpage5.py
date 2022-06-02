@@ -15,10 +15,14 @@ def update_offworkers(box,date):
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
+        self.date = self.mycal.date
         self.add_layout_offworkers()
+        for id in self.mycal.ids:
+            btn = self.mycal.ids[id]
+            #btn.bind(on_release=self.on_release)
 
     def add_layout_offworkers(self):
-        date = datetime(*self.mycal.date)
+        date = datetime(*self.date)
         color = 0,0,0,1
         font_name = 'NanumGothic'
         for off in convert_offworkers(date):
@@ -44,10 +48,11 @@ class MyStartBox(MDBoxLayout):
         print(date)
         update_offworkers(self.offworkers,date)
 
+    def on_release(self,btn):
+        update_offworkers(self.offworkers,self.mycal.date)
 
 class Mystartpage(MDApp):
     def build(self):
-        Window.clearcolor
         return MyStartBox()
 
 

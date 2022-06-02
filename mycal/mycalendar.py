@@ -123,6 +123,8 @@ class MyCalendar(BoxLayout):
         self.update_date(btn.text)
     def update_date(self,text):
         self.date = self.year, self.month, int(text)
+        #print(dir(MDApp))
+        MDApp.get_running_app().root.on_press(self.date)
         #print(self.date)
         #self.root.on_click(self.date)
 

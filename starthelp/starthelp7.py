@@ -259,14 +259,6 @@ def get_offworkers(date):
     #  1     A1, 이종화,     B1, 서광석
     #  2     A2 이종화,      B2, 류정희
 
-def convert_offworkers(date:datetime) -> list: # [6/1, A1, 이종화 B1 육백근]
-    offs = list()
-    for i in range(4):
-        adate = date + timedelta(days=i)
-        aday = f'{adate.month}/{adate.day}'
-        offs.append([aday] + get_offworkers(adate)[1:] )
-    return offs
-
 def get_dayornight(date):
     diff = (datetime(date.year,date.month,date.day) - A_day1).days
     dayornight=['day1','day2','night1','night2','off1','off2']

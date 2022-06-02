@@ -1,12 +1,8 @@
-import os,csv, shutil
+import os
 from socket import gethostname
 from pathlib import Path
 from datetime import datetime,timedelta
 from functools import lru_cache
-from time import time
-from openpyxl import load_workbook
-from itertools import product
-from shutil import copy2
 
 def timeit(func):
     from functools import wraps
@@ -33,9 +29,9 @@ if gethostname() == 'main':
     snippingtoolfile =  r'C:\WINDOWS\system32\SnippingTool.exe'
     gitfile = r'\\Sub\d\A조\sub박종우\GitPortable\GitBashPortable.exe'
     #NOTE png files
-    #daypatrolfile =  r'\\Sub\d\01.A조\sub박종우\banpo\day_patrol.png'
-    #nightpatrolfile =  r'\\Sub\d\01.A조\sub박종우\banpo\night_patrol.png'
-    #dongpostfile =  r'\\Sub\d\01.A조\sub박종우\banpo\images\dong_post.png'
+    daypatrolfile =  r'\\Sub\d\01.A조\sub박종우\banpo\day_patrol.png'
+    nightpatrolfile =  r'\\Sub\d\01.A조\sub박종우\banpo\night_patrol.png'
+    dongpostfile =  r'\\Sub\d\01.A조\sub박종우\banpo\dong_post.png'
     # NOTE folders
     workfolder =  r'D:\01.업무문서'
     commutefolder =  r'D:\01.업무문서\04.출근부 관련\02.각 조별 월별 출근부'
@@ -86,20 +82,20 @@ elif gethostname() == 'Sub':
     infofolder =  r'\\Main\d\A조\안내문'
     banpofolder = r'D:\01.A조\sub박종우\banpo'
 
-    #NOTE banpo\images png files
-    dongpostfile    = r'D:\01.A조\sub박종우\banpo\images\dong_post.png'
-    phonefile       = r'\\Main\d\A조\직원연락처(내선번호),조직도\직원연락처(내선번호)-5-02.jpg'
+    #NOTE png files
+    dongpostfile    =  r'D:\01.A조\sub박종우\banpo\dong_post.png'
+    phonefile       = r'\\Main\d\A조\직원연락처(내선번호)-3.11.jpg'
     map1ffile       = r'\\Main\d\A조\엑셀링크\반포자이아파트.jpg'
     mapb1file       = r'\\Main\d\A조\엑셀링크\\지하주차장.png'
     mapb1cctvfile   = r'\\Main\d\A조\엑셀링크\\지하주차장cctv.png'
     vaultfile       = r'\\Main\d\A조\엑셀링크\\금고.png'
-    gatemanfile     = r'D:\01.A조\sub박종우\banpo\images\세대현관문.jpg'
+    gatemanfile     = r'D:\01.A조\sub박종우\banpo\세대현관문.jpg'
 
     #NOTE Button image_filename
-    ev_button_img       = r'D:\01.A조\sub박종우\banpo\images\ev_button.png'
-    cctv_button_img     = r'D:\01.A조\sub박종우\banpo\images\cctv_button.png'
-    homenet_button_img  = r'D:\01.A조\sub박종우\banpo\images\homenet_button.png'
-    vault_button_img    = r'D:\01.A조\sub박종우\banpo\images\vault_button.png'
+    ev_button_img       = r'D:\01.A조\sub박종우\banpo\ev_button.png'
+    cctv_button_img     = r'D:\01.A조\sub박종우\banpo\cctv_button.png'
+    homenet_button_img  = r'D:\01.A조\sub박종우\banpo\homenet_button.png'
+    vault_button_img    = r'D:\01.A조\sub박종우\banpo\vault_button.png'
 elif gethostname() == 'meetluck':
     # NOTE files
     minwonfile = r'D:\Documents\d\01.업무문서\000. 민원처리내역.xlsx'
@@ -112,7 +108,7 @@ elif gethostname() == 'meetluck':
     gitfile = r'D:\01.A조\sub박종우\GitPortable\GitBashPortable.exe'
 
     #NOTE png files
-    dongpostfile =  r'D:\Documents\banpo\images\dong_post.png'
+    dongpostfile =  r'D:\Documents\banpo\dong_post.png'
 
     # NOTE folders
     workfolder =  r'D:\Documents\d\01.업무문서'
@@ -141,18 +137,6 @@ default_date=(today.month,today.day, today.year)
 
 print( " ==> import starthelp.py ")
 
-def getminwonfile(root):
-    copiedfile = Path(root,'files/minwon2022.xlsx')
-    print(copiedfile)
-    if file_exists(copiedfile):
-        if is_modified(minwonfile,copiedfile):
-            shutil.copy2(minwonfile,copiedfile)
-            print(f'{minwonfile} modified -> {copiedfile} copied')
-    else:
-        shutil.copy2(minwonfile,copiedfile)
-        print(f'{copiedfile} not exists, {copiedfile} copied')
-    return copiedfile
-
 def file_exists(file):
     from os.path import exists
     return exists(file)
@@ -162,13 +146,13 @@ def is_modified(origin,copied):
 def get_weekday(date):
     days = '월 화 수 목 금 토 일'.split()
     return days[date.weekday()]
-def get_weeklyreports(date,weekday=3):
+def get_weeklyreports(date):
     from calendar import monthrange
     weeklydates = []
-    firstweekday,end = monthrange(date.year, date.month)
+    weekday,end = monthrange(date.year, date.month)
     for day in range(1,end+1):
         adate = datetime(date.year, date.month, day)
-        if adate.weekday() == weekday:  # 3 -> 목, 4->금
+        if adate.weekday() == 3:  # 3 -> 목
             weeklydates.append(adate)
     return weeklydates
 
@@ -202,70 +186,42 @@ def get_monthlycommutefile(date): return get_filenamesOndate(date)[0]
 def get_dailyreportfile(date):    return get_filenamesOndate(date)[1:3]
 
 @timeit
-def create_commute_csv(date):
+@lru_cache(maxsize=4)
+def get_offworkers(date):
+    #XXX takes LONG time
     #XXX openpyxl in read_only mode , wb.close not work
-    month,day = date.month, date.day
+    from time import time
+    from openpyxl import load_workbook
+    import shutil
+    import pandas as pd
     commutefile = get_monthlycommutefile(date)
-    copiedfile = r'./commute{}.xlsx'.format(date.month)
-    csvfile = r'./commute{}.csv'.format(date.month)
-    if file_exists(copiedfile) and not is_modified(commutefile,copiedfile):
-        print(f'{copiedfile} exist and not modified, check csv file')
-        if file_exists(csvfile):
-            print(f'{csvfile} exist, nothing changed')
-            return
+    copiedfile = r'./commutefile.xlsx'
+    if file_exists(copiedfile):
+        if is_modified(commutefile,copiedfile):
+            shutil.copy2(commutefile,copiedfile)
+            print(f'{commutefile} modified -> {copiedfile} copied')
+    else:
+        shutil.copy2(commutefile,copiedfile)
+        print(f'{copiedfile} not exists, {copiedfile} copied')
 
-    print(f'creating {csvfile}')
-    copy2(commutefile,copiedfile)
     start = time()
     wb = load_workbook( copiedfile, data_only=True,read_only=True )
     ws = wb['조별연차표'] 
+    print(f'{time() - start} elapsed for coverting to dataframe')
 
     def R1C1(row,col): return ws.cell(row,col).value
-    # XXX to reduce elapsed time, get team and off for date1,date2,date3,date4 at once
-    #  30     A1, 이종화,     B1, 서광석
-    #  31     A2 이종화,      B2, 류정희
-    #   1     A2 이종화,      B2, 류정희
-    #   2     A2 이종화,      B2, 류정희
-
-    #class team: day,night = get_workteam(date)
-    #class off: day,night = '',''
-    with open(csvfile, 'w',newline='') as f:
-        write = csv.writer(f)
-        #write.writerows( get_rows() )
-        for r,c in product([4,8,12,16,20],[2,3,4,5,6,7,8]):
-            offlist = []
-            aday = R1C1(r,c)
-            if not aday: continue
-            print(aday)
-            adate = datetime(date.year,date.month,aday)
-            offlist.append(aday)                   # date
-            offlist.append(get_workteam(adate)[0]) # team for day
-            offlist.append(R1C1(r+1,c))            # off  for day
-            offlist.append(get_workteam(adate)[1]) # team for night
-            offlist.append(R1C1(r+2,c))            # off  for night
-            write.writerow( offlist )
-
-@timeit
-@lru_cache(maxsize=4)
-def get_offworkers(date):
-    create_commute_csv(date)
-    csvfile = f'commute{date.month}.csv'
-    with open(csvfile, 'r') as file:
-        reader = csv.reader(file)
-        for r1,row in enumerate( row for row in reader ):
-            if int(date.day) == int(r1)+1:
-                return row[:]
-    # XXX to reduce elapsed time, get team and off for date1,date2,date3,date4 at once
-    #  1     A1, 이종화,     B1, 서광석
-    #  2     A2 이종화,      B2, 류정희
-
-def convert_offworkers(date:datetime) -> list: # [6/1, A1, 이종화 B1 육백근]
-    offs = list()
-    for i in range(4):
-        adate = date + timedelta(days=i)
-        aday = f'{adate.month}/{adate.day}'
-        offs.append([aday] + get_offworkers(adate)[1:] )
-    return offs
+    # date1,date2,date3,date4
+    class team: day,night = get_workteam(date)
+    class off: day,night = '',''
+    from itertools import product
+    rc = product([4,8,12,16,20],[2,3,4,5,6,7,8])
+    for r,c in rc:
+        if R1C1(r,c) == date.day:
+            off.day,off.night = R1C1(r+1,c), R1C1(r+2,c)
+            wb.close()
+            return ( [team.day,off.day], [team.night,off.night] )
+    else:
+        wb.close()
 
 def get_dayornight(date):
     diff = (datetime(date.year,date.month,date.day) - A_day1).days
@@ -278,7 +234,5 @@ def get_workteam(date):
     return (dayteam,nightteam)
 
 if __name__ == '__main__':
-    date = datetime.strptime('22-5-10','%y-%m-%d')
-    create_commute_csv(date)
-    workteam = get_offworkers(date)
+    workteam = get_offworkers(today)
     print(today,workteam)
