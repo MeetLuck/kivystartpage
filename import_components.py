@@ -10,9 +10,7 @@ from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.app import App
 from kivymd.app import MDApp
 from kivy.core.window import Window
-from mycal.mycalendar import MyCalendar
-from functools import partial
-from starthelp.starthelp import *
-from kivy.config import Config
-from datetime import datetime,timedelta
 from kivy.core.text import LabelBase
+from kivy.config import Config
+from kivy.properties import ObjectProperty
+

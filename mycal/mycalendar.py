@@ -1,6 +1,7 @@
 from kivymd.app import MDApp
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
+from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.button import Button
 from kivy.core.window import Window
@@ -13,21 +14,21 @@ Window.size = 300,120
 #kvfile = join(dirname(__file__),'mycalendar.kv')
 
 class MyButton(Button):
-    def __init__(self, color = (0,0,0,1),background_color=(0.8,0.8,0.8,0), **kwargs):
+    def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.color = color
-        self.background_color = background_color
+        self.color = 1,1,1,1
         self.background_normal = ''
+        self.background_color = 0,0,0.2,1
 
-class MyCalendar(BoxLayout):
+class MyCalendar(MDBoxLayout):
 
     import calendar
     from datetime import datetime
     now = datetime.now()
     year,month,day = now.year, now.month, now.day
     TextCalendar = calendar.TextCalendar(calendar.SUNDAY)
-    unsel = type("unselect", (), {'bg':(0.8,0.8,0.8,0)})
-    sel = type("select", (), {'bg':(0.8,0.8,0.8,1)})
+    unsel = type("unselect", (), {'bg':(0,0,0.2,1)})
+    sel = type("select", (), {'bg':(0.3,0.3,0.3,1)})
     today = type("today", (), {'fg':(0,0.8,0,1)})
 
     def __init__(self,**kwargs):
@@ -38,16 +39,16 @@ class MyCalendar(BoxLayout):
 
     def create_layout(self):
         self.create_leftbox()
-        self.rightgrid = GridLayout(size_hint =( 0.8,1), padding = 0, spacing = 0, rows = 7, cols = 7)
+        self.rightgrid = GridLayout(size_hint =( 0.75,1), padding = 0, spacing = 0, rows = 7, cols = 7)
         self.add_widget(self.leftbox)
         self.add_widget(self.rightgrid)
-        self.create_weekdays()
+        #self.create_weekdays()
         self.create_dates()
         #self.update_dates(self.year,self.month)
         print(self.unsel.bg)
 
     def create_leftbox(self):
-        self.leftbox = BoxLayout( size_hint = (0.2,1), orientation='vertical' )
+        self.leftbox = BoxLayout( size_hint = (0.25,1), orientation='vertical' )
         self.box1 = BoxLayout( size_hint =(1,0.28), orientation='horizontal')
         self.minusbutton = MyButton(bold=True,  markup=True, text = '[size=16][b]<[/b][/size]')#, on_release = self.on_change_month(-1) )
         self.plusbutton =  MyButton(bold=True,  markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
@@ -56,8 +57,8 @@ class MyCalendar(BoxLayout):
         self.box1.add_widget(self.minusbutton)
         self.box1.add_widget(self.plusbutton)
         self.monthbutton = MyButton( size_hint = (1,0.72), color = (0,1,0,0.5),bold = True, text = str(self.month))
-        self.monthbutton.font_size = self.monthbutton.height * 0.7
-        self.monthbutton.color = (0,0,0,0.5)
+        self.monthbutton.font_size = self.monthbutton.height * 0.65
+        self.monthbutton.color = (0.4,0.4,0.4,1)
         self.leftbox.add_widget(self.box1)
         self.leftbox.add_widget(self.monthbutton)
 
@@ -65,11 +66,11 @@ class MyCalendar(BoxLayout):
         for col,weekday in enumerate('SUN MON TUS WED THU FRI SAT'.split()):
             button = Button(text=weekday)
             button.font_size = 12
-            button.background_color = 0.6,0.6,0.6,1
+            button.background_color = 0,0,0.15,1
             button.background_normal=''
-            if weekday == 'SUN':   button.color = 1,0,0,1
-            elif weekday == 'SAT': button.color = 0,0,1,1
-            else:                  button.color = 0,0,0,1
+            if weekday == 'SUN':   button.color = 0.5,0,0,1
+            elif weekday == 'SAT': button.color = 0,0,0.5,1
+            else:                  button.color = 0.5,0.5,0.5,1
             self.rightgrid.add_widget(button)
 
     def create_dates(self):
@@ -102,6 +103,7 @@ class MyCalendar(BoxLayout):
             id = f'rc{row}{col}'
             button = self.ids[id]
             button.text = str(aday)
+            button.color = 0.7,0.7,0.7,1
             if amonth == month:
                 if col == 0: button.color = 1,0,0,1 # SUNDAY
                 if col == 6: button.color = 0,0,1,1 # SATERDAY
@@ -110,7 +112,7 @@ class MyCalendar(BoxLayout):
                     button.color = self.today.fg
                     button.background_color = self.sel.bg
             else:  # not this month
-                button.color = 0,0,0,0.3
+                button.color = 0.5,0.5,0.5,0.7
             if col == 6: row += 1
             #print(id,button.text)
 

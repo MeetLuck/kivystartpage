@@ -27,13 +27,6 @@
     spacing: 5
     #md_bg_color: 0,0,0.7,0.5
     size_hint: 0.3, 1
-<MyLabel@Label>
-    color:0,0,0,1
-    bold:True
-    markup:True
-    font_size: 14
-    size: self.texture_size
-    halign: 'left'
 
 <MyStartBox>:
     mycal: id_mycal
@@ -42,21 +35,19 @@
         TopLeftBox:
             MDBoxLayout:
                 orientation:'horizontal'
-                md_bg_color: 0,0,0,0.1
+                md_bg_color: 0,0,0.2,1
                 size_hint: 1, 0.28
                 padding: 5
                 spacing: 0
                 MyCalendar:
                     id: id_mycal
                     size_hint: 0.4,1
+                    padding:5
                     #pos_hint:{'center_x':0.1,'center_y':0.45}
-                MDBoxLayout:
+                OffBox:
                     id: id_offworkers
                     size_hint: 0.6,1
-                    orientation: 'vertical'
-                    md_bg_color: 1,1,1,1
-                    padding:0
-                    spacing:0
+                    pos_hint:{'center_x':0.6,'center_y':0.5}
             MDBoxLayout:
                 orientation:'vertical'
                 size_hint: 1, 0.72

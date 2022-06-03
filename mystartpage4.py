@@ -10,7 +10,6 @@ def convert_offworkers(date:datetime) -> list: # [6/1, A1, 이종화 B1 육백�
         offs.append([aday] + get_offworkers(adate)[1:] )
     return offs
 
-
 def update_offworkers(box,date:tuple):
     offs = convert_offworkers(datetime(*date))
     for i,grid in enumerate( reversed(box.children) ):
