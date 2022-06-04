@@ -14,35 +14,8 @@ class MyLabel(Label):
         self.color = 0.6,0.6,0.6,1
         self.size = self.texture_size
         self.font_name='NanumGothic'
-        self.bind(size=self.setter('text_size'))    
+        #self.bind(size=self.setter('text_size'))    XXX comment this ALWAYS
         
-class MyGrid(GridLayout):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.cols = 5
-        self.padding = 5
-        self.spacing = 5
-        self.create_layout()
-
-    def create_layout(self):
-        self.theday       = MyLabel(text='0',size_hint=(0.2,1),halign= 'center')
-        self.dayteam      = MyLabel(text='1',size_hint=(0.1,1),halign= 'center')
-        self.dayworkers   = MyLabel(text='2',size_hint=(0.3,1),halign='left')
-        self.nightteam    = MyLabel(text='3',size_hint=(0.1,1),halign='center')
-        self.nightworkers = MyLabel(text='4',size_hint=(0.3,1),halign='left')
-        self.add_widget(self.theday)
-        self.add_widget(self.dayteam)
-        self.add_widget(self.dayworkers)
-        self.add_widget(self.nightteam)
-        self.add_widget(self.nightworkers)
-
-    def update(self,off): # [6/1,A1,이종화, B1,서광석]
-        self.theday.text        = off[0]
-        self.dayteam.text       = off[1]
-        self.dayworkers.text    = off[2]
-        self.dayteam.text       = off[3]
-        self.nightworkers.text  = off[4]
-
 
 class OffBox(MDBoxLayout):
 
@@ -55,20 +28,36 @@ class OffBox(MDBoxLayout):
 
     def create_layout(self,date=datetime(2022,6,1)):
         for off in convert_offworkers(date):
-            grid = MyGrid()
-            grid.update(off)
+            grid = GridLayout(cols=5,padding=5,spacing=2)
+            labels = list()
+            labels.append(MyLabel(text=off[0],size_hint=(0.2,1), halign= 'center'))
+            labels.append(MyLabel(text=off[1],size_hint=(0.1,1), halign= 'center'))
+            labels.append(MyLabel(text=off[2],size_hint=(0.3,1), halign='left'))
+            labels.append(MyLabel(text=off[3],size_hint=(0.1,1), halign='center'))
+            labels.append(MyLabel(text=off[4],size_hint=(0.3,1), halign='left'))
+            for label in labels:
+                label.bind(size=label.setter('text_size'))    
+                grid.add_widget(label)
             self.add_widget(grid)
 
     def update_offworkers(self,date):
-        root = App.get_running_app().root
         print('==>',self.parent)
-        print('================>',App.get_running_app().root)
-        #print('================>',root.date)
+        print('================>',self, date)
+        #print('==>',self.root)
         off = convert_offworkers(datetime(*date))
+        colors = [(0.6,0.6,0.6)]*5
+        if 'A' in off[1]:
+            colors[0] = 0,0.4,0.9,1
+            colors[1] = 0,0.4,0.9,1
+        elif 'A' in off[3]:
+            colors[0] = 0,0.4,0.9,1
+            colors[3] = 0,0.4,0.9,1
+        else:
+            colors = [0.6,0.6,0.6,1]*5
         for i,grid in enumerate( reversed(self.children) ):
             for j,label in enumerate(reversed(grid.children) ):
                 label.text = off[i][j]
-                label.bold = True
+                label.color = colors[j]
 
 
 if __name__ ==  '__main__':
@@ -80,9 +69,9 @@ if __name__ ==  '__main__':
     orientation:'vertical'
 
 <RootWidget>:
-    myoffworkers:id_myoffworkers
+    myoffworkers: id_myoffworkers
     OffBox:
-        id: id_myoffworkers
+        id:  id_myoffworkers
     Button:
         text:'change date'
         on_press: root.on_press()
@@ -95,7 +84,6 @@ if __name__ ==  '__main__':
         def __init__(self,**kwargs):
             super().__init__(**kwargs)
             self.date = (2022,6,1)
-            print( datetime( *self.date))
         def on_press(self):
             self.date = (2022,6,12)
             self.myoffworkers.update_offworkers(self.date)
