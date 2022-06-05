@@ -114,10 +114,9 @@ class MyCalendar(MDBoxLayout):
                     button.color = self.today.fg
                     button.background_color = self.sel.bg
             else:  # not this month
-                #button.color = 0.5,0.5,0.5,0.7
+                button.color = 0.5,0.5,0.5,0.7
                 button.background_color = self.unsel.bg
-                button.background_disabled_normal = ''
-                button.disabled = True
+                #button.disabled = True
             if col == 6: row += 1
             #print(id,button.text)
 
@@ -128,9 +127,16 @@ class MyCalendar(MDBoxLayout):
             else:
                 self.ids[id].background_color = self.unsel.bg
         root = MDApp.get_running_app().root
-        self.date = self.year,self.month,int(btn.text)
-        print('=========================',self.date)
-        root.update_date(self.date)
+        root.update_date(self.year,self.month,int(btn.text))
+        #self.update_date(btn.text)
+
+#    def update_date(self,text):
+#        self.date = self.year, self.month, int(text)
+#        #print(dir(MDApp))
+#        MDApp.get_running_app().root.on_press(self.date)
+#        #print(self.date)
+#        #self.root.on_click(self.date)
+
 
     def on_change_month(self,nextmonth,btn):
         print('==>',nextmonth)

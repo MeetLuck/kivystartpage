@@ -1,14 +1,13 @@
 #1. flow # 
 
                                                                           
-                  Widget1(Cal)     +------->>Wiget2(Off)                  
-                      |            |              |                       
-                      |            |              |                       
-                      |         *app.root*          |                      
-                     <id>          ^              |                       
-                      |            |              |                       
-                      |            |              |                       
-                      + ---> |Root|(MyStartBox) <---+                      
+                Widget1(Cal)    Widget1(Cal)         +---------Wiget2(Off)                  
+                      ^            ^                 |            |          
+                      |            |                 |            |           
+                   <child>      <child>           <parent>     *app.root*    
+                      |            |                 |            |          
+                      |            |                 |            |          
+                      +--------- |Root|(MyStartBox) <--+------------|
                                    ^                                      
                                    |                                      
                                    |                                      

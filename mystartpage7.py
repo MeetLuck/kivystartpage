@@ -4,19 +4,21 @@ from functools import partial
 from starthelp.starthelp import *
 from mycal.mycalendar import MyCalendar
 from myoffworkers import *
-from myfilesbox import *
 from datetime import datetime,timedelta
 import os
 
-Window.size = 1200,900
+Window.size = 1200,1800
 
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.update_date(self.mycalendar.date)
+        self.update(self.mycalendar.date)
 
-    def update_date(self,date:tuple):
-        print(date,type(date))
+    def on_press(self,date:tuple):
+        print(date)
+        self.update(date)
+
+    def update(self,date):
         self.offworkers.update(date)
 
 class Mystartpage(MDApp):

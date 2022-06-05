@@ -14,3 +14,13 @@ from kivy.core.text import LabelBase
 from kivy.config import Config
 from kivy.properties import ObjectProperty
 
+from os.path import dirname,join
+LabelBase.register(name='NanumGothic', fn_regular=join( dirname(__file__),'NanumGothic.ttf'),fn_bold=join( dirname(__file__),'NanumGothicBold.ttf'))
+#LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
+
+class Color:
+    fg = 110/255,130/255,150/255,1
+    #fg = 90/255,110/255,110/255,1
+    class off:
+        day   = 0, 100/255, 240/255, 1
+        night = 0, 100/255, 240/255, 1

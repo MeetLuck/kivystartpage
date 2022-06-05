@@ -2,56 +2,71 @@
     orientation: 'vertical'
     padding: 5
     spacing: 5
-    md_bg_color: 0.5,0.5,0.5,0
+    md_bg_color: 0,16/255,38/255,1
 <TopBox@BoxLayout>:
     orientation: 'horizontal'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,1,0.5
-    size_hint: 1, 0.7
+    size_hint: 1, 0.8
 <BottomBox@BoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 5
     #md_bg_color: 1,0,0,0.5
-    size_hint: 1, 0.3
+    size_hint: 1, 0.2
 <TopLeftBox@BoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,0.5,0.5
     size_hint: 0.7, 1
-<TopRightBox@BoxLayout>:
+<TopRightBox@MDBoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 5
-    #md_bg_color: 0,0,0.7,0.5
+    md_bg_color: 0,0,0.3,1
     size_hint: 0.3, 1
+<MyFilesBox@MDBoxLayout>:
+    orientation: 'vertical'
+    padding: 5
+    md_bg_color: 0,0.2,0,1
+<MyFoldersBox@MDBoxLayout>:
+    orientation: 'vertical'
+    padding: 5
+    md_bg_color: 0.2,0.2,0,1
+<MyServicesBox@MDBoxLayout>:
+    orientation: 'vertical'
+    padding: 5
+    md_bg_color: 0.2,0,0,1
 
 <MyStartBox>:
-    mycal: id_mycal
+    mycalendar: id_mycal
     offworkers: id_offworkers
     TopBox:
         TopLeftBox:
             MDBoxLayout:
                 orientation:'horizontal'
-                md_bg_color: 0,0,0.2,1
-                size_hint: 1, 0.28
-                padding: 5
-                spacing: 0
+                #md_bg_color: 0,0,0.2,1
+                size_hint: 1, 0.2
+                padding: 2
+                spacing: 20
                 MyCalendar:
                     id: id_mycal
                     size_hint: 0.4,1
-                    padding:5
+                    #padding:5
                     #pos_hint:{'center_x':0.1,'center_y':0.45}
                 OffBox:
                     id: id_offworkers
                     size_hint: 0.6,1
-                    pos_hint:{'center_x':0.6,'center_y':0.5}
+                    pos_hint:{'center_x':0.5,'center_y':0.6}
             MDBoxLayout:
                 orientation:'vertical'
-                size_hint: 1, 0.72
+                size_hint: 1, 0.8
                 md_bg_color: 0,0.5,0,1
         TopRightBox: # Top Right Box
+            MyFilesBox:
+            MyFoldersBox:
+            MyServicesBox:
         
     BottomBox: # Bottom Box

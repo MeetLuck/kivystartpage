@@ -1,4 +1,5 @@
 from import_components import *
+
 from functools import partial
 from starthelp.starthelp import *
 from mycal.mycalendar import MyCalendar
@@ -6,13 +7,13 @@ from datetime import datetime,timedelta
 import os
 
 #Window.clearcolor = (0.5,0.5,0.5,1)
-LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
-
+#LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
 class MyLabel(Label):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.color = 0.6,0.6,0.6,1
+        self.color = Color.fg
         self.size = self.texture_size
+        self.bold = True
         self.font_name='NanumGothic'
         self.bind(size=self.setter('text_size'))    
         
@@ -20,8 +21,8 @@ class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.cols = 5
-        self.padding = 5
-        self.spacing = 5
+        self.padding = 0
+        self.spacing = 0
         self.create_layout()
 
     def create_layout(self):
@@ -40,7 +41,7 @@ class MyGrid(GridLayout):
         self.theday.text        = off[0]
         self.dayteam.text       = off[1]
         self.dayworkers.text    = off[2]
-        self.dayteam.text       = off[3]
+        self.nightteam.text     = off[3]
         self.nightworkers.text  = off[4]
 
 
@@ -50,34 +51,40 @@ class OffBox(MDBoxLayout):
         super().__init__(**kwargs)
         self.orientation = 'vertical'
         self.padding = 0
-        self.spacing = 5
+        self.spacing = 0
         self.create_layout()
 
+
     def create_layout(self,date=datetime(2022,6,1)):
-        for off in convert_offworkers(date):
+        for offdata in convert_offworkers(date):
             grid = MyGrid()
-            grid.update(off)
+            grid.update(offdata)
             self.add_widget(grid)
 
-    def update_offworkers(self,date):
-        root = App.get_running_app().root
-        print('==>',self.parent)
-        print('================>',App.get_running_app().root)
-        #print('================>',root.date)
+
+    def update(self,date):
         off = convert_offworkers(datetime(*date))
         for i,grid in enumerate( reversed(self.children) ):
-            for j,label in enumerate(reversed(grid.children) ):
+            # XXX check A1, A2
+            theday, dayteam, dayoffs, nightteam, nightoffs = off[i]
+            for j,label in enumerate(reversed(grid.children)):
                 label.text = off[i][j]
+                label.color = Color.fg
                 label.bold = True
-
+                if dayteam in 'A1A2' and j in [0,1,2]:
+                    label.color = Color.off.day
+                    label.bold = True
+                if nightteam in 'A1A2' and j in [0,3,4]:
+                    label.color = Color.off.night
+                    label.bold = True
 
 if __name__ ==  '__main__':
 
     kv = '''
 <RootWidget@MDBoxLayout>:
     orientation:'vertical'
-<OffBox@MDBoxLayout>:
-    orientation:'vertical'
+#<OffBox@MDBoxLayout>:
+#    orientation:'vertical'
 
 <RootWidget>:
     myoffworkers:id_myoffworkers
@@ -98,7 +105,7 @@ if __name__ ==  '__main__':
             print( datetime( *self.date))
         def on_press(self):
             self.date = (2022,6,12)
-            self.myoffworkers.update_offworkers(self.date)
+            self.myoffworkers.update(self.date)
 
     class TestApp(MDApp):
         def build(self):
