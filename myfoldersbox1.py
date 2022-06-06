@@ -1,32 +1,34 @@
 from import_components import *
 
-class MyFoldersButton(MDRectangleFlatIconButton):
+class MyFoldersButton(MDIconButton):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.icon = "folder"
-        self.pos_hint = {"center_x":.5,"center_y":.5}
-        #self.size_hint_x = None
-        #self.width: 190
-        #self.text_size = self.size
-        self.font_size = 14
-        #self.theme_icon_size = "Custom"
-        self.md_bg_color =0,0,0,0
-        #self.icon_size = '256sp'
-        self.text_color = Color.folders.fg
-        self.icon_color = Color.folders.bg
-        self.font_name = 'NotoSerifKR'
-        self.line_color = 0,0,0,0
-        self.padding = 0
-#        self.on_press = self.text_color = [1,0,0,1]
-#        self.on_release = self.text_color =  [0,0,1,1]
+        #self.background_normal = ''
+        #self.font_name = 'GothicA1'
+        #self.md_bg_color = 0.5,0.5,0.5,1
+        #self.size_hint_y = None
+        #self.padding = 5
+        #self.height = 10
+        self.font_name = 'NotoSerifKR-Bold'
+        #self.bold = True
+        #self.color = Color.black
+        #self.background_color = Color.files.bg
+        #self.font_size = 12
+
+        #self.icon = "language-python"
+        self.icon = 'magnify'
+        #pos_hint: {"center_x": .5}
+        self.theme_text_color  = "Custom"
+        self.text_color =  0, 0, 0, 1
+        self.icon_color =  0.5, 0.5, 0.5, 1
+        #self.md_bg_color =  get_color_from_hex("#552A7D")
 
 class MyFoldersBox(MDGridLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.cols = 4
         self.rows = 3
-        self.padding = 0,0,0,0
-        self.spacing = 5,0
+        self.spacing = 0
         #self.root = MDApp.get_running_app().root
         self.create_layout()
 
@@ -48,9 +50,9 @@ class MyFoldersBox(MDGridLayout):
         self.add_widget(self.commutefolderbtn)
         self.add_widget(self.weeklyreportfolderbtn)
         self.add_widget(self.incidentfolderbtn)
-        self.add_widget(self.infofolderbtn)
         self.add_widget(self.Afolderbtn)
         self.add_widget(self.excellinkfolderbtn)
+        self.add_widget(self.infofolderbtn)
         self.add_widget(self.dummy1btn)
         self.add_widget(self.parkfolderbtn)
         self.add_widget(self.cctvfolderbtn)

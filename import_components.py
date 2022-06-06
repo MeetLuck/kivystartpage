@@ -5,6 +5,8 @@ from kivymd.uix.gridlayout import MDGridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 from kivymd.uix.button import MDFlatButton
+from kivymd.uix.button import MDIconButton
+from kivymd.uix.button import MDRectangleFlatIconButton
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
@@ -26,12 +28,12 @@ class Color:
     fg = 110/255,130/255,150/255,1
     bg = 0,16/255,38/255,1
     black = 0,0,0,1
-    #fg = 90/255,110/255,110/255,1
     class off:
         day   = 0, 70/255, 255/255, 1
         night = 0, 70/255, 255/255, 1
     class files:
-        fg   = 0, 130/255, 255/255, 1
-        #fg   = 0, 150/255, 255/255, 1
-        #fg   = 0, 50/255, 255/255, 1
+        fg   = 0, 70/255, 255/255, 1
         bg   = 0,16/255,38/255,1
+    class folders:
+        fg   = 150/255, 170/255, 185/255, 1
+        bg   = 120/255, 120/255, 70/255, 1
