@@ -13,8 +13,10 @@ class MyLabel(Label):
         super().__init__(**kwargs)
         self.color = Color.fg
         self.size = self.texture_size
-        self.bold = True
-        self.font_name='NanumGothic'
+        self.bold = False
+        self.font_name='GothicA1'
+        #self.font_name='NotoSerifKR'
+        self.font_size=16
         self.bind(size=self.setter('text_size'))    
         
 class MyGrid(GridLayout):
@@ -70,7 +72,7 @@ class OffBox(MDBoxLayout):
             for j,label in enumerate(reversed(grid.children)):
                 label.text = off[i][j]
                 label.color = Color.fg
-                label.bold = True
+                label.bold = False
                 if dayteam in 'A1A2' and j in [0,1,2]:
                     label.color = Color.off.day
                     label.bold = True

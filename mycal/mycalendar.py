@@ -10,17 +10,20 @@ from os.path import dirname,abspath,join
 from functools import partial
 
 import sys
-sys.path.append('..')
+sys.path.append('../kivystartpage')
 from import_components import *
 
 Window.size = 300,120
 
-class MyButton(Button):
+class MyCalButton(Button):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.color = Color.fg
         self.background_normal = ''
         self.background_color = 0,16/255,38/255,1
+        #self.font_name = 'GothicA1'
+        #self.font_name = 'GothicA1'
+        #self.bold = True
 
 class MyCalendar(MDBoxLayout):
 
@@ -52,13 +55,13 @@ class MyCalendar(MDBoxLayout):
     def create_month_box(self):
         self.leftbox = BoxLayout( size_hint = (0.25,1), orientation='vertical' )
         self.box1 = BoxLayout( size_hint =(1,0.28), orientation='horizontal')
-        self.minusbutton = MyButton(bold=True,  markup=True, text = '[size=16][b]<[/b][/size]')#, on_release = self.on_change_month(-1) )
-        self.plusbutton =  MyButton(bold=True,  markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
+        self.minusbutton = MyCalButton(bold=True,  markup=True, text = '[size=16][b]<[/b][/size]')#, on_release = self.on_change_month(-1) )
+        self.plusbutton =  MyCalButton(bold=True,  markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
         self.minusbutton.bind(on_release = partial(self.on_change_month,-1) )
         self.plusbutton.bind(on_release = partial(self.on_change_month,+1)  )
         self.box1.add_widget(self.minusbutton)
         self.box1.add_widget(self.plusbutton)
-        self.monthbutton = MyButton( size_hint = (1,0.72), color = Color.fg,bold = True, text = str(self.month))
+        self.monthbutton = MyCalButton( size_hint = (1,0.72), color = Color.fg,bold = True, text = str(self.month))
         self.monthbutton.font_size = self.monthbutton.height * 0.65
         #self.monthbutton.color = Color.fg
         self.leftbox.add_widget(self.box1)
@@ -78,7 +81,7 @@ class MyCalendar(MDBoxLayout):
     def create_dates(self):
         for row in range(1,6+1):
             for col in range(7):
-                button = MyButton()
+                button = MyCalButton()
                 #button.background_color = 0,0,0,1
                 button.bind(on_press = self.on_click)
                 id = f'rc{row}{col}'
@@ -106,6 +109,7 @@ class MyCalendar(MDBoxLayout):
             button = self.ids[id]
             button.text = str(aday)
             button.color = Color.fg
+            button.disabled = False
             if amonth == month:
                 if col == 0: button.color = 1,0,0,1 # SUNDAY
                 if col == 6: button.color = 0,0,1,1 # SATERDAY

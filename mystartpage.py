@@ -5,6 +5,8 @@ from starthelp.starthelp import *
 from mycal.mycalendar import MyCalendar
 from myoffworkers import *
 from myfilesbox import *
+from mycmdsbox  import *
+from myfoldersbox import *
 from datetime import datetime,timedelta
 import os
 
@@ -18,6 +20,7 @@ class MyStartBox(MDBoxLayout):
     def update_date(self,date:tuple):
         print(date,type(date))
         self.offworkers.update(date)
+        self.myfiles.update(date)
 
 class Mystartpage(MDApp):
     def build(self):

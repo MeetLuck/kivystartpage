@@ -198,7 +198,8 @@ def get_filenamesOndate(date):
         raise Exception(f'{__file__}\n  {monthlycommutefile} not exist')
     return (monthlycommutefile,dailyreportfile1,dailyreportfile2)
 
-def get_monthlycommutefile(date): return get_filenamesOndate(date)[0]
+def get_monthlycommutefile(date):
+    return get_filenamesOndate(date)[0]
 def get_dailyreportfile(date):    return get_filenamesOndate(date)[1:3]
 
 @timeit
