@@ -21,10 +21,10 @@ class MyCmdsBox(MDBoxLayout):
 
     def create_layout(self):
         #print(minwonfile)
-        self.minwonreportbtn = MyCmdsButton(text='$ python minwon.py',on_press=self.on_press)
-        self.minwonDBbtn     = MyCmdsButton(text='$ python minwondb.py',on_press=self.on_press)
-        self.dBBrowserbtn    = MyCmdsButton(text='DB Browser for SQLite',on_press=self.on_press)
-        self.HPScanbtn       = MyCmdsButton(text='HP Scan',on_press=self.on_press)
+        self.minwonreportbtn = MyApplicationButton(text='python minwon.py',on_press=self.on_press)
+        self.minwonDBbtn     = MyApplicationButton(text='python minwondb.py',on_press=self.on_press)
+        self.dBBrowserbtn    = MyDBButton(text='DB Browser for SQLite',on_press=self.on_press)
+        self.HPScanbtn       = MyPrinterButton(text='HP Scan',on_press=self.on_press)
         self.add_widget(self.minwonreportbtn)
         self.add_widget(self.minwonDBbtn)
         self.add_widget(self.dBBrowserbtn)

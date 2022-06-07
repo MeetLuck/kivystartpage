@@ -20,13 +20,13 @@
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,0.5,0.5
-    size_hint: 0.6, 1
+    size_hint: 0.63, 1
 <TopRightBox@MDBoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,0.3,1
-    size_hint: 0.4, 1
+    size_hint: 0.37, 1
 <MyFilesBox@MDBoxLayout>:
     orientation: 'vertical'
     size_hint: 1,0.25
@@ -39,9 +39,10 @@
     size_hint: 1,0.25
     pos_hint:{'center_x':0.5, 'center_y':0.5}
     #md_bg_color: 0,0,0.2,1
-<MyServicesBox@MDBoxLayout>:
-    orientation: 'vertical'
+<MyServicesBox@MDGridLayout>:
+    #orientation: 'vertical'
     size_hint: 1,0.25
+    pos_hint:{'center_x':0.5, 'center_y':0.5}
     #md_bg_color: 0.2,0,0,1
 
 <MyStartBox>:

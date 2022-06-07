@@ -24,16 +24,141 @@ LabelBase.register(name='NotoSerifKR', fn_regular=join( dirname(__file__),'NotoS
 LabelBase.register(name='GothicA1', fn_regular=join( dirname(__file__),'GothicA1-Regular.ttf'),fn_bold=join( dirname(__file__),'GothicA1-Bold.ttf'))
 #LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
 
-class Color:
+class base:
     fg = 110/255,130/255,150/255,1
     bg = 0,16/255,38/255,1
-    black = 0,0,0,1
+    icon  = 150/255*0.6, 170/255*0.6, 185/255*0.6, 1
+    black  = 0,0,0,1
+    white  = 150/255, 170/255, 185/255, 1
+
+class Color:
     class off:
         day   = 0, 70/255, 255/255, 1
         night = 0, 70/255, 255/255, 1
     class files:
-        fg   = 0, 70/255, 255/255, 1
+        fg   = 0, 150/255,0/255,1
+        icon   = 0, 100/255,0/255,1
         bg   = 0,16/255,38/255,1
+    class cmds:
+        fg     = 0, 150/255,255/255,1
+        icon   = 0, 100/255,255/255,1
     class folders:
-        fg   = 150/255, 170/255, 185/255, 1
+        fg   = base.fg
         bg   = 120/255, 120/255, 70/255, 1
+    class homenet:
+        fg     = 200/255, 70/255, 0,1
+        icon  = 150/255*0.7, 170/255*0.7, 185/255*0.7, 1
+    class vault:
+        fg  = base.fg
+        icon  = 150/255*0.7, 170/255*0.7, 185/255*0.7, 1
+    class ev:
+        fg     = 200/255, 70/255, 0,1
+        icon  = base.icon
+    class cctv:
+        fg     = 200/255, 70/255, 0,1
+        icon  = base.icon
+    class door:
+        fg  = base.fg
+        icon  = base.icon
+    class contact:
+        fg  = base.fg
+        icon  = base.icon
+    class map:
+        fg  = base.fg
+        icon  = base.icon
+
+class MyIconButton(MDRectangleFlatIconButton):
+    def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):
+        super().__init__(**kwargs)
+        self.line_color = (0,0,0,0)
+        self.font_name = 'NotoSerifKR-Bold.otf'
+
+class MyExcelButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "microsoft-excel"
+        self.text_color = Color.files.fg
+        self.icon_color = Color.files.icon
+
+class MyApplicationButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "application"
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+
+class MyDBButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "database"
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+
+class MyPrinterButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "printer"
+        self.font_size = 14
+        self.md_bg_color =0,0,0,0
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+        self.font_name = 'NotoSerifKR'
+        self.line_color = 0,0,0,0
+
+class MyFoldersButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "folder"
+        self.text_color = Color.folders.fg
+        self.icon_color = Color.folders.bg
+
+class MyEVButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "elevator"
+        self.text_color = Color.ev.fg
+        self.icon_color = Color.ev.icon
+
+class MyCCTVButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "cctv"
+        self.text_color = Color.cctv.fg
+        self.icon_color = Color.cctv.icon
+
+class MyHomenetButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "home"
+        self.text_color = Color.homenet.fg
+        self.icon_color = Color.homenet.icon
+
+class MyVaultButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "safe"
+        self.text_color = Color.vault.fg
+        self.icon_color = Color.vault.icon
+
+class MyDoorButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "door"
+        self.text_color = Color.door.fg
+        self.icon_color = Color.door.icon
+
+
+class MyContactButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "contacts"
+        self.text_color = Color.contact.fg
+        self.icon_color = Color.contact.icon
+
+class MyMapButton(MyIconButton):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "map"
+        self.text_color = Color.map.fg
+        self.icon_color = Color.map.icon
+        #self.line_color = 0,1,0,1

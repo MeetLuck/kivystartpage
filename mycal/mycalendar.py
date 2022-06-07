@@ -18,7 +18,7 @@ Window.size = 300,120
 class MyCalButton(Button):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.color = Color.fg
+        self.color = base.fg
         self.background_normal = ''
         self.background_color = 0,16/255,38/255,1
         #self.font_name = 'GothicA1'
@@ -61,9 +61,9 @@ class MyCalendar(MDBoxLayout):
         self.plusbutton.bind(on_release = partial(self.on_change_month,+1)  )
         self.box1.add_widget(self.minusbutton)
         self.box1.add_widget(self.plusbutton)
-        self.monthbutton = MyCalButton( size_hint = (1,0.72), color = Color.fg,bold = True, text = str(self.month))
+        self.monthbutton = MyCalButton( size_hint = (1,0.72), color = base.fg,bold = True, text = str(self.month))
         self.monthbutton.font_size = self.monthbutton.height * 0.65
-        #self.monthbutton.color = Color.fg
+        #self.monthbutton.color = base.fg
         self.leftbox.add_widget(self.box1)
         self.leftbox.add_widget(self.monthbutton)
 
@@ -108,7 +108,7 @@ class MyCalendar(MDBoxLayout):
             id = f'rc{row}{col}'
             button = self.ids[id]
             button.text = str(aday)
-            button.color = Color.fg
+            button.color = base.fg
             button.disabled = False
             if amonth == month:
                 if col == 0: button.color = 1,0,0,1 # SUNDAY

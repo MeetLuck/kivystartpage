@@ -8,15 +8,15 @@ import os
 
 #Window.clearcolor = (0.5,0.5,0.5,1)
 #LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
-class MyLabel(Label):
+class MyLabel(MDLabel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.color = Color.fg
+        self.color = base.fg
         self.size = self.texture_size
         self.bold = False
-        self.font_name='GothicA1'
+        self.font_name='NotoSerifKR'
         #self.font_name='NotoSerifKR'
-        self.font_size=16
+        self.font_size=14
         self.bind(size=self.setter('text_size'))    
         
 class MyGrid(GridLayout):
@@ -28,7 +28,7 @@ class MyGrid(GridLayout):
         self.create_layout()
 
     def create_layout(self):
-        self.theday       = MyLabel(text='0',size_hint=(0.2,1),halign= 'center')
+        self.theday       = MyLabel(text='0',size_hint=(0.25,1),halign= 'center')
         self.dayteam      = MyLabel(text='1',size_hint=(0.1,1),halign= 'center')
         self.dayworkers   = MyLabel(text='2',size_hint=(0.3,1),halign='left')
         self.nightteam    = MyLabel(text='3',size_hint=(0.1,1),halign='center')
@@ -71,7 +71,7 @@ class OffBox(MDBoxLayout):
             theday, dayteam, dayoffs, nightteam, nightoffs = off[i]
             for j,label in enumerate(reversed(grid.children)):
                 label.text = off[i][j]
-                label.color = Color.fg
+                label.color = base.fg
                 label.bold = False
                 if dayteam in 'A1A2' and j in [0,1,2]:
                     label.color = Color.off.day

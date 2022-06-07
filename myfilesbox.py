@@ -1,16 +1,5 @@
 from import_components import *
 
-class MyFilesButton(Button):
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
-        self.background_normal = ''
-        self.font_name = 'GothicA1'
-        #self.font_name = 'NotoSerifKR'
-        self.bold = True
-        self.color = Color.files.fg
-        self.background_color = Color.files.bg
-        self.font_size = 16
-
 class MyFilesBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
@@ -21,10 +10,10 @@ class MyFilesBox(MDBoxLayout):
 
     def create_layout(self):
         #print(minwonfile)
-        self.minwonbtn       = MyFilesButton(text='민원처리내역.xlsx',on_press=self.on_press)
-        self.dailyreportbtn1 = MyFilesButton(text='dailyreportfile1',on_press=self.on_press)
-        self.dailyreportbtn2 = MyFilesButton(text='dailyreportfile2',on_press=self.on_press)
-        self.monthlycommutebtn = MyFilesButton(text='monthlycommutefile',on_press=self.on_press)
+        self.minwonbtn       = MyExcelButton(text='민원처리내역.xlsx',on_press=self.on_press)
+        self.dailyreportbtn1 = MyExcelButton(text='dailyreportfile1',on_press=self.on_press)
+        self.dailyreportbtn2 = MyExcelButton(text='dailyreportfile2',on_press=self.on_press)
+        self.monthlycommutebtn = MyExcelButton(text='monthlycommutefile',on_press=self.on_press)
         self.add_widget(self.minwonbtn)
         self.add_widget(self.dailyreportbtn1)
         self.add_widget(self.dailyreportbtn2)
