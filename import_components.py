@@ -18,6 +18,7 @@ from kivy.core.text import LabelBase
 from kivy.config import Config
 from kivy.properties import ObjectProperty
 from starthelp.starthelp import *
+from functools import partial
 
 from os.path import dirname,join
 LabelBase.register(name='NanumGothic', fn_regular=join( dirname(__file__),'NanumGothic.ttf'),fn_bold=join( dirname(__file__),'NanumGothicBold.ttf'))
@@ -72,8 +73,9 @@ class Color:
         fg  = base.fg
         icon  = base.icon
     class Dday:
-        fg = base.fg
-        past = 0.3,0.3,0.3,1
+        fg   = base.fg
+        past = 110/255,130/255,150/255, 0.7
+        #past = 0.4,0.4,0.4,1
 
 class MyLabel(MDLabel):
     def __init__(self, **kwargs):
@@ -89,7 +91,8 @@ class MyIconButton(MDRectangleFlatIconButton):
     def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):
         super().__init__(**kwargs)
         self.line_color = (0,0,0,0)
-        self.font_name = 'NotoSerifKR-Bold.otf'
+        self.font_name = 'NotoSerifKR'
+        #self.font_name = 'NotoSerifKR-Bold.otf'
 
 class MyExcelButton(MyIconButton):
     def __init__(self,**kwargs):

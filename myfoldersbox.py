@@ -40,10 +40,18 @@ class MyFoldersBox(MDGridLayout):
 
     def on_press(self,btn):
         root = Path(__file__).parent
-        if btn == self.minwonreportbtn: os.system( 'python {}'.format(minwonpyfile) )
-        if btn == self.minwonDBbtn:     os.system( 'python {}'.format(minwondbfile) )
-        if btn == self.dBBrowserbtn:    os.startfile(dbbrowserfile)
-        if btn == self.HPScanbtn:       os.startfile(hpscanfile)
+        if btn == self.workfolderbtn:           os.startfile(workfolder)                                      
+        if btn == self.commutefolderbtn:        os.startfile(commutefolder)
+        if btn == self.weeklyreportfolderbtn:   os.startfile(weeklyworkfolder)
+        if btn == self.Afolderbtn:              os.startfile(Afolder)
+        if btn == self.excellinkfolderbtn:      os.startfile(excellinkfolder)
+        if btn == self.infofolderbtn:           os.system('explorer.exe /n,{}'.format(infofolder) )
+        if btn == self.parkfolderbtn:           os.startfile(parkfolder)
+        if btn == self.cctvfolderbtn:           os.startfile(cctvfolder)
+        if btn == self.startfolderbtn:          os.startfile(banpofolder)
+        if btn == self.incidentfolderbtn:       os.startfile(incidentfolder)
+                                                
+
 
 if __name__ == '__main__':
 
