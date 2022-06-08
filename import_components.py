@@ -10,6 +10,7 @@ from kivymd.uix.button import MDRectangleFlatIconButton
 from kivymd.uix.button import MDRaisedButton
 from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.chip import MDChip
 from kivy.app import App
 from kivymd.app import MDApp
 from kivy.core.window import Window
@@ -33,9 +34,13 @@ class base:
 
 class Color:
     class off:
-        day   = 0, 70/255, 255/255, 1
-        night = 0, 70/255, 255/255, 1
+        day     = 0, 50/255,255/255,1
+        night   = 0, 50/255,255/255,1
+        #night = 110/255,130/255,150/255,1
+        #day   = 0, 70/255, 255/255, 1
+        #night = 0, 70/255, 255/255, 1
     class files:
+        #fg   = 0, 150/255,0/255,1
         fg   = 0, 150/255,0/255,1
         icon   = 0, 100/255,0/255,1
         bg   = 0,16/255,38/255,1
@@ -47,10 +52,10 @@ class Color:
         bg   = 120/255, 120/255, 70/255, 1
     class homenet:
         fg     = 200/255, 70/255, 0,1
-        icon  = 150/255*0.7, 170/255*0.7, 185/255*0.7, 1
+        icon   = base.icon
     class vault:
         fg  = base.fg
-        icon  = 150/255*0.7, 170/255*0.7, 185/255*0.7, 1
+        icon  = base.icon
     class ev:
         fg     = 200/255, 70/255, 0,1
         icon  = base.icon
@@ -66,6 +71,19 @@ class Color:
     class map:
         fg  = base.fg
         icon  = base.icon
+    class Dday:
+        fg = base.fg
+        past = 0.3,0.3,0.3,1
+
+class MyLabel(MDLabel):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.font_name='NotoSerifKR'
+        self.color = base.fg
+        self.bold = False
+        self.font_size=14
+        self.size = self.texture_size
+        #self.bind(size=self.setter('text_size'))    
 
 class MyIconButton(MDRectangleFlatIconButton):
     def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):

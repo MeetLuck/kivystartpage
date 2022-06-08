@@ -6,18 +6,6 @@ from mycal.mycalendar import MyCalendar
 from datetime import datetime,timedelta
 import os
 
-#Window.clearcolor = (0.5,0.5,0.5,1)
-#LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
-class MyLabel(MDLabel):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.color = base.fg
-        self.size = self.texture_size
-        self.bold = False
-        self.font_name='NotoSerifKR'
-        #self.font_name='NotoSerifKR'
-        self.font_size=14
-        self.bind(size=self.setter('text_size'))    
         
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):

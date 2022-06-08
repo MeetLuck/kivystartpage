@@ -9,17 +9,21 @@
     spacing: 5
     #md_bg_color: 0,0,1,0.5
     size_hint: 1, 0.8
-<BottomBox@BoxLayout>:
+<NotificationBox@MDBoxLayout>: # Bottom Box
     orientation: 'vertical'
     padding: 5
-    spacing: 5
-    #md_bg_color: 1,0,0,0.5
+    spacing: 0
+    #md_bg_color: 0.2,0,0,1
+    line_color: 0.3,0.3,0.3,1
+    line_width: 1
     size_hint: 1, 0.2
-<TopLeftBox@BoxLayout>:
+<TopLeftBox@MDBoxLayout>:
     orientation: 'vertical'
-    padding: 5
+    padding: 2
     spacing: 5
     #md_bg_color: 0,0,0.5,0.5
+    #line_color: 0.3,0.3,0.3,1
+    #line_width: 1
     size_hint: 0.63, 1
 <TopRightBox@MDBoxLayout>:
     orientation: 'vertical'
@@ -30,20 +34,30 @@
 <MyFilesBox@MDBoxLayout>:
     orientation: 'vertical'
     size_hint: 1,0.25
+    line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0.2,0,1
 <MyCmdsBox@MDBoxLayout>:
     orientation: 'vertical'
     size_hint: 1,0.25
+    line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0.2,0,1
 <MyFoldersBox@MDGridLayout>:
     size_hint: 1,0.25
     pos_hint:{'center_x':0.5, 'center_y':0.5}
+    line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0,0.2,1
 <MyServicesBox@MDGridLayout>:
     #orientation: 'vertical'
     size_hint: 1,0.25
     pos_hint:{'center_x':0.5, 'center_y':0.5}
+    line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0.2,0,0,1
+<MyWeeklyReportGrid@MDGridLayout>:
+    pos_hint:{'center_x':0.47, 'center_y':0.5}
+<MyMonthlyReportGrid@MDGridLayout>:
+    pos_hint:{'center_x':0.47, 'center_y':0.5}
+<MyTodoBox@MDBoxLayout>:
+    pos_hint:{'center_x':0.52, 'center_y':0.5}
 
 <MyStartBox>:
     mycalendar: id_mycal
@@ -55,8 +69,10 @@
                 orientation:'horizontal'
                 #md_bg_color: 0,0,0.2,1
                 size_hint: 1, 0.2
-                padding: 2
+                padding: 10
                 spacing: 20
+                line_color: 0.2,0.2,0.2,1
+                line_width: 1
                 MyCalendar:
                     id: id_mycal
                     size_hint: 0.4,1
@@ -65,11 +81,13 @@
                 OffBox:
                     id: id_offworkers
                     size_hint: 0.6,1
-                    pos_hint:{'center_x':0.5,'center_y':0.6}
+                    #pos_hint:{'center_x':0.5,'center_y':0.6}
             MDBoxLayout:
                 orientation:'vertical'
                 size_hint: 1, 0.8
-                md_bg_color: 0,0.5,0,1
+                #md_bg_color: 0,0,0.12,1
+                line_color: 0.2,0.2,0.2,1
+                line_width: 1
         TopRightBox: # Top Right Box
             MyFilesBox:
                 id: id_myfilesbox
@@ -78,4 +96,17 @@
             MyFoldersBox:
             MyServicesBox:
         
-    BottomBox: # Bottom Box
+    NotificationBox: # Bottom Box
+        id: id_notification
+        MDLabel:
+            font_size: 20
+            text: '[color=#005500][b]Notification[/b][/color]'
+            markup: True
+        MyWeeklyReportGrid:
+        MyMonthlyReportGrid:
+        MyTodoBox:
+        MDBoxLayout:
+            Label:
+                text: 'Todo'
+
+        
