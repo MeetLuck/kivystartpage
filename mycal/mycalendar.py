@@ -1,17 +1,6 @@
-from kivymd.app import MDApp
-from kivy.lang import Builder
-from kivy.uix.boxlayout import BoxLayout
-from kivymd.uix.boxlayout import MDBoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.button import Button
-from kivy.core.window import Window
-from kivy.config import Config
-from os.path import dirname,abspath,join
-from functools import partial
-
+from import_components import *
 import sys
 sys.path.append('../kivystartpage')
-from import_components import *
 
 Window.size = 300,120
 
@@ -22,13 +11,10 @@ class MyCalButton(Button):
         self.background_normal = ''
         self.background_color = 0,16/255,38/255,1
         #self.font_name = 'GothicA1'
-        #self.font_name = 'GothicA1'
         #self.bold = True
 
 class MyCalendar(MDBoxLayout):
 
-    import calendar
-    from datetime import datetime
     now = datetime.now()
     year,month,day = now.year, now.month, now.day
     TextCalendar = calendar.TextCalendar(calendar.SUNDAY)
