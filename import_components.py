@@ -1,6 +1,7 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.floatlayout import FloatLayout
 from kivymd.uix.gridlayout import MDGridLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -19,8 +20,22 @@ from kivy.config import Config
 from kivy.properties import ObjectProperty
 from starthelp.starthelp import *
 from functools import partial
+from kivy.utils import get_color_from_hex as colorhex
+from kivy.clock import Clock
+from kivy.uix.popup import Popup
 
 from os.path import dirname,join
+
+
+#To get rid of the red dot:
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
+#To set the icon so you don’t see the Kivy Icon first:
+#Config.set('kivy', 'window_icon','your_app_icon_64x64.png' )
+
+#So pressing esc does not close your program:
+#Config.set('kivy', 'exit_on_escape', 0)
+
 LabelBase.register(name='NanumGothic', fn_regular=join( dirname(__file__),'NanumGothic.ttf'),fn_bold=join( dirname(__file__),'NanumGothicBold.ttf'))
 LabelBase.register(name='NotoSerifKR', fn_regular=join( dirname(__file__),'NotoSerifKR-Regular.otf'),fn_bold=join( dirname(__file__),'NotoSerifKR-Bold.otf'))
 LabelBase.register(name='GothicA1', fn_regular=join( dirname(__file__),'GothicA1-Regular.ttf'),fn_bold=join( dirname(__file__),'GothicA1-Bold.ttf'))
@@ -88,8 +103,10 @@ class MyLabel(MDLabel):
         #self.bind(size=self.setter('text_size'))    
 
 class MyIconButton(MDRectangleFlatIconButton):
-    def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):
+    #def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):
+    def __init__(self,font_size=14,**kwargs):
         super().__init__(**kwargs)
+        self.theme_text_color = "Custom"
         self.line_color = (0,0,0,0)
         self.font_name = 'NotoSerifKR'
         #self.font_name = 'NotoSerifKR-Bold.otf'

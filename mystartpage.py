@@ -12,6 +12,10 @@ Window.size = 1200,900
 Window.top = 80
 Window.left = 350
 
+from kivymd.uix.behaviors import TouchBehavior
+
+
+
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
@@ -22,9 +26,15 @@ class MyStartBox(MDBoxLayout):
         self.offworkers.update(date)
         self.myfiles.update(date)
 
+    def on_long_touch(self, *args):
+        print("<on_long_touch> event", args)
+
+
+
 class Mystartpage(MDApp):
+
     def build(self):
         Window.clearcolor = 0,16/255,38/255,1
-        return MyStartBox()
+        self.root = MyStartBox()
 
 Mystartpage().run()
