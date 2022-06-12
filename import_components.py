@@ -1,45 +1,44 @@
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.floatlayout import FloatLayout
-from kivymd.uix.gridlayout import MDGridLayout
-from kivy.uix.label import Label
-from kivy.uix.button import Button
-from kivymd.uix.button import MDFlatButton
-from kivymd.uix.button import MDIconButton
-from kivymd.uix.button import MDRectangleFlatIconButton
-from kivymd.uix.button import MDRaisedButton
-from kivymd.uix.label import MDLabel
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.chip import MDChip
-from kivy.app import App
-from kivymd.app import MDApp
+from kivy.uix.gridlayout import GridLayout
+from kivymd.uix.gridlayout import MDGridLayout
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
+from kivymd.uix.label import MDLabel
+from kivy.uix.button import Button
+from kivymd.uix.button import MDFlatButton, MDIconButton, MDRectangleFlatIconButton, MDRaisedButton
 from kivy.core.window import Window
 from kivy.core.text import LabelBase
+from kivy.uix.popup import Popup
+from kivymd.uix.chip import MDChip
+from kivymd.uix.behaviors import TouchBehavior
+from kivy.clock import Clock
+from kivy.app import App
+from kivymd.app import MDApp
 from kivy.config import Config
 from kivy.properties import ObjectProperty
-from starthelp.starthelp import *
-from functools import partial
 from kivy.utils import get_color_from_hex as colorhex
-from kivy.clock import Clock
-from kivy.uix.popup import Popup
 import calendar
 from datetime import datetime
 from os.path import dirname,join
+from starthelp.starthelp import *
+from functools import partial
 
 
 #To get rid of the red dot:
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
-
 #To set the icon so you don’t see the Kivy Icon first:
 #Config.set('kivy', 'window_icon','your_app_icon_64x64.png' )
-
 #So pressing esc does not close your program:
 #Config.set('kivy', 'exit_on_escape', 0)
 
-LabelBase.register(name='NanumGothic', fn_regular=join( dirname(__file__),'NanumGothic.ttf'),fn_bold=join( dirname(__file__),'NanumGothicBold.ttf'))
-LabelBase.register(name='NotoSerifKR', fn_regular=join( dirname(__file__),'NotoSerifKR-Regular.otf'),fn_bold=join( dirname(__file__),'NotoSerifKR-Bold.otf'))
-LabelBase.register(name='GothicA1', fn_regular=join( dirname(__file__),'GothicA1-Regular.ttf'),fn_bold=join( dirname(__file__),'GothicA1-Bold.ttf'))
+# XXX fonts
+fonts= join( dirname(__file__),'fonts')
+NotoSerifKRBold=join( fonts,'NotoSerifKR-Bold.otf')
+LabelBase.register(name='NanumGothic', fn_regular=join( fonts,'NanumGothic.ttf'),fn_bold=join( fonts,'NanumGothicBold.ttf'))
+LabelBase.register(name='NotoSerifKR', fn_regular=join( fonts,'NotoSerifKR-Regular.otf'),fn_bold=join( fonts,'NotoSerifKR-Bold.otf'))
+LabelBase.register(name='GothicA1', fn_regular=join( fonts,'GothicA1-Regular.ttf'),fn_bold=join( fonts,'GothicA1-Bold.ttf'))
 #LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
 
 class base:

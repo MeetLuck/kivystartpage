@@ -1,11 +1,5 @@
 from import_components import *
 
-from functools import partial
-from starthelp.starthelp import *
-from mycal.mycalendar import MyCalendar
-from datetime import datetime,timedelta
-import os
-
         
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):

@@ -13,7 +13,15 @@
                                    |                                      
                                   *app*                                    
                                                                           
-2. datetime~
+#2. kivy.config#
+  https://kivy.org/doc/stable/api-kivy.config.html
+
+  custom titlebar~
+    graphics - custom_titlebar --> https://kivy.org/doc/stable/api-kivy.core.window.html#kivy.core.window.WindowBase.set_custom_titlebar
+
+#3.kivy.core.window#
+  no title bar~
+    Window.borderless = True
 
 
 
