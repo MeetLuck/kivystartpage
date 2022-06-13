@@ -2,7 +2,8 @@
     orientation: 'vertical'
     padding: 5
     spacing: 5
-    md_bg_color: 0,16/255,38/255,1
+    md_bg_color: 0,0,0.15,1
+    #md_bg_color: 0,16/255,38/255,1
 <ToolBox@BoxLayout>:
     orientation: 'horizontal'
     padding: 0
@@ -94,29 +95,37 @@
                     id: id_offworkers
                     size_hint: 0.6,1
                     #pos_hint:{'center_x':0.5,'center_y':0.6}
-            MDBoxLayout:
-                orientation:'vertical'
-                #cols : 1
-                #rows : 2
+            MDGridLayout:
+                cols : 2
                 size_hint: 1, 0.8
-                md_bg_color: 0,0,0.12,1
-                line_color: 0.2,0.2,0.2,1
-                line_width: 5
-                MyPatrolBox:
-                    id: id_mypatrol
-                    #width : 400
-                    #height : 250
-                    #padding : 10
-                    pos_hint_x: None
-                    left: 100
-                    #center_x: self.parent.center_x + 0.5
-                    #pos_hint: {'center_x':1.5, 'center_y':0.5}
-                    size_hint: 0.5,0.5
+                MDBoxLayout:
+                    orientation: 'vertical'
+                    size_hint: 0.3,1
+                    MoveInOutBox: # 전출입 및 승강기 사용현황
+                        size_hint: 1,0.4
+                        md_bg_color: 0,0,0.12,1
+                        line_color: 0.2,0.2,0.2,1
+                        line_width: 5
+                    MDBoxLayout:
+                        size_hint: 1,0.6
+                MDFloatLayout:
+                    size_hint: 0.7,1
+                    md_bg_color: 0,0,0.12,1
                     line_color: 0.2,0.2,0.2,1
-                    line_width: 1
-                MyPostBox:
-                    id: id_mypatrol
-                    size_hint: 0.4, 0.5
+                    line_width: 5
+                    MyPatrolBox:
+                        id: id_mypatrol
+                        pos_hint: {'center_x':0.5, 'center_y':0.75}
+                        size_hint: 0.6,0.4
+                        #line_color: 0.2,0.2,0.2,1
+                        #line_width: 1
+                    MyPostBox:
+                        id: id_mypatrol
+                        size_hint: 0.8, 0.5
+                        pos_hint: {'center_x':0.55, 'center_y':0.25}
+                        Image:
+                            source: 'images/dong_post.png'
+                            size: self.texture_size
         TopRightBox: # Top Right Box
             MyFilesBox:
                 id: id_myfilesbox

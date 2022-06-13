@@ -9,11 +9,13 @@ from myservicesbox import *
 from mynotification import *
 from mypostbox import *
 from mypatrolbox import *
+from mymoveinout import *
 
 Window.size = 1200,900
 Window.top = 80
 Window.left = 350
 #Window.borderless = True
+Config.set('graphics','resizable', True)
 
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
@@ -27,6 +29,10 @@ class MyStartBox(MDBoxLayout):
 
     def on_long_touch(self, *args):
         print("<on_long_touch> event", args)
+
+    def update(self):
+        self.ids['id_mypatrol'].update()
+
 
 
 class Mystartpage(MDApp):

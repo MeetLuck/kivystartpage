@@ -41,9 +41,13 @@ LabelBase.register(name='NotoSerifKR', fn_regular=join( fonts,'NotoSerifKR-Regul
 LabelBase.register(name='GothicA1', fn_regular=join( fonts,'GothicA1-Regular.ttf'),fn_bold=join( fonts,'GothicA1-Bold.ttf'))
 #LabelBase.register(name='NanumGothic', fn_regular='NanumGothic.ttf',fn_bold='NanumGothicBold.ttf')
 
+def get_color(color,multiply):
+    return list(map(lambda c : c * multiply, color[:-1])) + [1]
+
 class base:
     fg = 110/255,130/255,150/255,1
-    bg = 0,16/255,38/255,1
+    bg = 0,0,0.12,1
+    #bg = 0,16/255,38/255,1
     icon  = 150/255*0.6, 170/255*0.6, 185/255*0.6, 1
     black  = 0,0,0,1
     white  = 150/255, 170/255, 185/255, 1
@@ -59,7 +63,8 @@ class Color:
         #fg   = 0, 150/255,0/255,1
         fg   = 0, 150/255,0/255,1
         icon   = 0, 100/255,0/255,1
-        bg   = 0,16/255,38/255,1
+        #bg   = 0,16/255,38/255,1
+        bg   = base.bg
     class cmds:
         fg     = 0, 150/255,255/255,1
         icon   = 0, 100/255,255/255,1
@@ -102,14 +107,20 @@ class MyLabel(MDLabel):
         self.size = self.texture_size
         #self.bind(size=self.setter('text_size'))    
 
-class MyIconButton(MDRectangleFlatIconButton):
-    #def __init__(self,font_size=14, md_bg_color=(0,0,0,0),**kwargs):
+class B1(MDFlatButton):
     def __init__(self,font_size=14,**kwargs):
         super().__init__(**kwargs)
         self.theme_text_color = "Custom"
         self.line_color = (0,0,0,0)
         self.font_name = 'NotoSerifKR'
-        #self.font_name = 'NotoSerifKR-Bold.otf'
+        self.font_size = 14
+
+class MyIconButton(MDRectangleFlatIconButton):
+    def __init__(self,font_size=14,**kwargs):
+        super().__init__(**kwargs)
+        self.theme_text_color = "Custom"
+        self.line_color = (0,0,0,0)
+        self.font_name = 'NotoSerifKR'
 
 class MyExcelButton(MyIconButton):
     def __init__(self,**kwargs):
@@ -184,7 +195,6 @@ class MyDoorButton(MyIconButton):
         self.icon = "door"
         self.text_color = Color.door.fg
         self.icon_color = Color.door.icon
-
 
 class MyContactButton(MyIconButton):
     def __init__(self,**kwargs):
