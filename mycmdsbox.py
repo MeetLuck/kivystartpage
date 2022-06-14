@@ -1,15 +1,15 @@
 from import_components import *
 
-class MyCmdsButton(Button):
+class CmdButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        self.background_normal = ''
-        self.font_name = 'GothicA1'
-        #self.font_name = 'NotoSerifKR'
+        self.font_name = 'NotoSerifKR'
         self.bold = True
         self.color = Color.files.fg
         self.background_color = Color.files.bg
-        self.font_size = 16
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+        #self.font_size = 16
 
 class MyCmdsBox(MDBoxLayout):
     def __init__(self,**kwargs):
@@ -21,14 +21,14 @@ class MyCmdsBox(MDBoxLayout):
 
     def create_layout(self):
         #print(minwonfile)
-        self.minwonreportbtn = MyApplicationButton(text='python minwon.py',on_press=self.on_press)
-        self.minwonDBbtn     = MyApplicationButton(text='python minwondb.py',on_press=self.on_press)
-        self.dBBrowserbtn    = MyDBButton(text='DB Browser for SQLite',on_press=self.on_press)
-        self.HPScanbtn       = MyPrinterButton(text='HP Scan',on_press=self.on_press)
+        self.minwonreportbtn  =  CmdButton(text='python minwon.py',     icon='numeric-4-circle',on_press=self.on_press)
+        self.HPScanbtn        =  CmdButton(text='HP Scan',              icon='numeric-5-circle',on_press=self.on_press)
+        self.minwonDBbtn      =  CmdButton(text='python minwondb.py',   icon='application',     on_press=self.on_press)
+        self.dBBrowserbtn     =  CmdButton(text='DB Browser for SQLite',icon='database',        on_press=self.on_press)
         self.add_widget(self.minwonreportbtn)
+        self.add_widget(self.HPScanbtn)
         self.add_widget(self.minwonDBbtn)
         self.add_widget(self.dBBrowserbtn)
-        self.add_widget(self.HPScanbtn)
 
     def on_press(self,btn):
         root = Path(__file__).parent

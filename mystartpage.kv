@@ -40,7 +40,7 @@
     size_hint: 0.37, 1
 <MyFilesBox@MDBoxLayout>:
     orientation: 'vertical'
-    size_hint: 1,0.25
+    size_hint: 1,0.2
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0.2,0,1
 <MyCmdsBox@MDBoxLayout>:
@@ -75,6 +75,9 @@
     myfiles: id_myfilesbox
     ToolBox:
         title: 'Demo Application'
+        Label:
+            id: id_time
+            text: 'datetime'
 
     TopBox:
         TopLeftBox:

@@ -119,6 +119,32 @@ class IB1(MDRectangleFlatIconButton):
         self.background_normal = ''
         self.font_name = 'NotoSerifKR'
 
+
+class MyApplicationButton(IB1):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "application"
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+
+class MyDBButton(IB1):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "database"
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+
+class MyPrinterButton(IB1):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.icon = "printer"
+        self.font_size = 14
+        self.md_bg_color =0,0,0,0
+        self.text_color = Color.cmds.fg
+        self.icon_color = Color.cmds.icon
+        self.font_name = 'NotoSerifKR'
+        self.line_color = 0,0,0,0
+
 class MyFoldersButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)

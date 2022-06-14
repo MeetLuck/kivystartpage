@@ -27,6 +27,19 @@
   must set 'resizable' True
   `Config.set('graphics','resizable',True)`
 
+5. clock~
+  # call my_callback as soon as possible (usually next frame.)
+  `Clock.schedule_once(my_callback)`
+  Note
+  If the callback returns False, the schedule will be canceled and won’t repeat.
+  If you want to schedule a function to call with default arguments, you can use the functools.partial python module:
+
+  `from functools import partial`
+  def my_callback(value, key, *args):
+      pass
+  Clock.schedule_interval( partial(my_callback, 'value', 'key'), 0.5)
+
+
 
 
 

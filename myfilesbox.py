@@ -1,22 +1,26 @@
 from import_components import *
 
+class XlButton(IB1):
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.text_color = Color.files.fg
+        self.icon_color = Color.files.icon
+
 class MyFilesBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.orientation='vertical'
         self.spacing = 0
-        #self.root = MDApp.get_running_app().root
         self.create_layout()
 
     def create_layout(self):
-        #print(minwonfile)
-        self.minwonbtn       = MyExcelButton(text='민원처리내역.xlsx',on_press=self.on_press)
-        self.dailyreportbtn1 = MyExcelButton(text='dailyreportfile1',on_press=self.on_press)
-        self.dailyreportbtn2 = MyExcelButton(text='dailyreportfile2',on_press=self.on_press)
-        self.monthlycommutebtn = MyExcelButton(text='monthlycommutefile',on_press=self.on_press)
+        self.minwonbtn          =  XlButton(text='민원처리내역.xlsx',  icon  =  'numeric-1-circle',on_press=self.on_press)
+        self.dailyreportbtn1    =  XlButton(text='dailyreportfile1',   icon  =  'numeric-2-circle',on_press=self.on_press)
+        #self.dailyreportbtn2    =  XlButton(text='dailyreportfile2',   icon  =  'microsoft-excel', on_press=self.on_press)
+        self.monthlycommutebtn  =  XlButton(text='monthlycommutefile', icon  =  'numeric-3-circle',on_press=self.on_press)
         self.add_widget(self.minwonbtn)
         self.add_widget(self.dailyreportbtn1)
-        self.add_widget(self.dailyreportbtn2)
+        #self.add_widget(self.dailyreportbtn2)
         self.add_widget(self.monthlycommutebtn)
 
     def on_press(self,btn):
@@ -42,7 +46,7 @@ class MyFilesBox(MDBoxLayout):
         date1str = date1.strftime('%y%m%d')
         date2str = date2.strftime('%y%m%d')
         self.dailyreportbtn1.text = f'일일상황보고 {date1str}.xlsx'
-        self.dailyreportbtn2.text = f'일일상황보고 {date2str}.xlsx'
+        #self.dailyreportbtn2.text = f'일일상황보고 {date2str}.xlsx'
         self.commutefile = get_monthlycommutefile(date1)
         self.monthlycommutebtn.text = Path(self.commutefile).name
 
