@@ -17,8 +17,9 @@ from kivy.clock import Clock
 from kivy.app import App
 from kivymd.app import MDApp
 from kivy.config import Config
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.utils import get_color_from_hex as colorhex
+from kivymd.uix.snackbar import Snackbar
 import calendar
 from datetime import datetime
 from os.path import dirname,join
@@ -119,12 +120,6 @@ class IB1(MDRectangleFlatIconButton):
         self.background_normal = ''
         self.font_name = 'NotoSerifKR'
 
-class MyFoldersButton(IB1):
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
-        self.icon = "folder"
-        self.text_color = Color.folders.fg
-        self.icon_color = Color.folders.bg
 
 class MyEVButton(IB1):
     def __init__(self,**kwargs):

@@ -4,12 +4,18 @@
     spacing: 5
     md_bg_color: 0,0,0.15,1
     #md_bg_color: 0,16/255,38/255,1
+<ToolBox@BoxLayout>:
+    orientation: 'horizontal'
+    padding: 0
+    spacing: 0
+    #md_bg_color: 0,0,1,0.5
+    size_hint: 1, 0.04
 <TopBox@BoxLayout>:
     orientation: 'horizontal'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,1,0.5
-    size_hint: 1, 0.75
+    size_hint: 1, 0.76
 <NotificationBox@MDBoxLayout>: # Bottom Box
     orientation: 'vertical'
     padding: 5
@@ -18,15 +24,6 @@
     line_color: 0.3,0.3,0.3,1
     line_width: 1
     size_hint: 1, 0.2
-<StatusBox@MDBoxLayout>:
-    orientation: 'vertical'
-    padding: 3
-    spacing: 0
-    #md_bg_color: 0.2,0,0,1
-    line_color: 0.3,0.3,0.3,1
-    line_width: 1
-    size_hint: 1, 0.05
-
 <TopLeftBox@MDBoxLayout>:
     orientation: 'vertical'
     padding: 2
@@ -76,7 +73,12 @@
     mycalendar: id_mycal
     offworkers: id_offworkers
     myfiles: id_myfilesbox
-    #status: id_status
+    ToolBox:
+        title: 'Demo Application'
+        Label:
+            id: id_time
+            text: 'datetime'
+
     TopBox:
         TopLeftBox:
             MDBoxLayout:
@@ -121,6 +123,7 @@
                         #line_color: 0.2,0.2,0.2,1
                         #line_width: 1
                     MyPostBox:
+                        id: id_mypatrol
                         size_hint: 0.8, 0.5
                         pos_hint: {'center_x':0.55, 'center_y':0.25}
                         Image:
@@ -146,9 +149,5 @@
         MDBoxLayout:
             Label:
                 text: 'Todo'
-    StatusBox:
-        MyLabel:
-            id: id_status
-            text: 'status bar'
-            font_size: 20
-            bold: True
+
+        

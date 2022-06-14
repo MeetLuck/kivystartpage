@@ -27,17 +27,11 @@ class MyFilesBox(MDBoxLayout):
         root = Path(__file__).parent
         if btn == self.minwonbtn:
             os.startfile(getminwonfile(root))
-            print(btn.text)
         if btn == self.dailyreportbtn1:
             os.startfile( get_dailyreportfile(datetime(*self.date))[0] )
-            print(btn.text)
-        if btn == self.dailyreportbtn2:
-            os.startfile( get_dailyreportfile(datetime(*self.date))[1] )
-            print(btn.text)
         # \\Main\d\01.업무문서\04.출근부 관련\02.각 조별 월별 출근부\202206 A,B,C조별 월별출근부(반포자이).xlsx
         if btn == self.monthlycommutebtn:
             os.startfile(self.commutefile)
-            print(btn.text)
 
     def update(self,date):
         self.date = date

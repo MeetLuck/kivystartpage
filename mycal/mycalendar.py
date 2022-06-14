@@ -9,7 +9,8 @@ class MyCalButton(Button):
         super().__init__(**kwargs)
         self.color = base.fg
         self.background_normal = ''
-        self.background_color = 0,16/255,38/255,1
+        self.background_color = 0,0,0,0
+        #self.background_color = 0,16/255,38/255,1
         #self.font_name = 'GothicA1'
         #self.bold = True
 
@@ -18,7 +19,8 @@ class MyCalendar(MDBoxLayout):
     now = datetime.now()
     year,month,day = now.year, now.month, now.day
     TextCalendar = calendar.TextCalendar(calendar.SUNDAY)
-    unsel = type("unselect", (), {'bg':(0,16/255,38/255,1)})
+    #unsel = type("unselect", (), {'bg':(0,16/255,38/255,1)})
+    unsel = type("unselect", (), {'bg':(0,0,0,0)})
     sel = type("select", (), {'bg':(0.3,0.3,0.3,1)})
     today = type("today", (), {'fg':(0,0.8,0,1)})
 
@@ -84,6 +86,7 @@ class MyCalendar(MDBoxLayout):
                 button.text = ''
                 button.bold = False
                 button.background_color = self.unsel.bg
+                #button.background_color = self.unsel.bg
                 #button.color = 0,0,0,1
 
     def update_dates(self,year,month):

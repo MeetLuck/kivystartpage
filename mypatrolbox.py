@@ -57,19 +57,22 @@ class MyPatrolBox(MDBoxLayout):
             button.color = base.fg
 
     def update(self):
+        # 24 or 12 am,pm
         hour = datetime.now().hour
         for grid in reversed(self.children):
             patrol_time = int( list(reversed(grid.children))[0].text )
+            if patrol_time == 24: patrol_time = 0
             if hour in [7,8,9] and patrol_time == 9:
                 self.reset_grid(grid)
             elif hour in [12,13] and patrol_time == 13:
+                self.reset_grid(grid)
+            elif hour in range(16,23+1) and patrol_time == 23:
                 self.reset_grid(grid)
             elif patrol_time == hour:
                 self.reset_grid(grid)
             else:
                 for button in grid.children:
-                    button.color = get_color(base.fg, 0.6)
-                print('not in patrol time',hour)
+                    button.color = get_color(base.fg, 0.7)
                 grid.md_bg_color = 0,0,0,0
 
 if __name__ == '__main__':

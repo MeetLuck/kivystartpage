@@ -1,5 +1,10 @@
 from import_components import *
 
+class FB(IB1):
+    def __init__(self,icon='folder',**kwargs):
+        super().__init__(icon=icon,**kwargs)
+        self.text_color = Color.folders.fg
+        self.icon_color = Color.folders.bg
 
 class MyFoldersBox(MDGridLayout):
     def __init__(self,**kwargs):
@@ -13,18 +18,19 @@ class MyFoldersBox(MDGridLayout):
 
     def create_layout(self):
         #print(minwonfile)
-        self.workfolderbtn          = MyFoldersButton(text=' 업무문서            ',on_press=self.on_press)
-        self.commutefolderbtn       = MyFoldersButton(text=' 출근부    ',on_press=self.on_press)
-        self.weeklyreportfolderbtn  = MyFoldersButton(text=' 주간업무',on_press=self.on_press)
-        self.incidentfolderbtn      = MyFoldersButton(text=' 사건사고',on_press=self.on_press)
-        self.Afolderbtn             = MyFoldersButton(text=' A조',on_press=self.on_press)
-        self.excellinkfolderbtn     = MyFoldersButton(text=' 엑셀링크',on_press=self.on_press)
-        self.infofolderbtn          = MyFoldersButton(text=' 안내문',on_press=self.on_press)
-        self.dummy1btn              = MyFoldersButton(text=' ',on_press=self.on_press)
-        self.parkfolderbtn          = MyFoldersButton(text=' 박종우',on_press=self.on_press)
-        self.cctvfolderbtn          = MyFoldersButton(text=' CCTV',on_press=self.on_press)
-        self.startfolderbtn         = MyFoldersButton(text=' startpage',on_press=self.on_press)
-        self.dummy2btn              = MyFoldersButton(text=' ',on_press=self.on_press)
+        #self.workfolderbtn          = FB(text=' 업무문서            ', icon = 'numeric-6-circle',on_press=self.on_press)
+        self.workfolderbtn          = FB(text=' 업무문서', icon = 'numeric-6-circle',on_press=self.on_press)
+        self.commutefolderbtn       = FB(text=' 출근부  ', icon = 'numeric-7-circle',on_press=self.on_press)
+        self.weeklyreportfolderbtn  = FB(text=' 주간업무', icon = 'numeric-8-circle',on_press=self.on_press)
+        self.incidentfolderbtn      = FB(text=' 사건사고',on_press=self.on_press)
+        self.Afolderbtn             = FB(text=' A조',on_press=self.on_press)
+        self.excellinkfolderbtn     = FB(text=' 엑셀링크',on_press=self.on_press)
+        self.infofolderbtn          = FB(text=' 안내문', icon = 'numeric-9-circle',on_press=self.on_press)
+        self.dummy1btn              = FB(text=' ',on_press=self.on_press)
+        self.parkfolderbtn          = FB(text=' 박종우',on_press=self.on_press)
+        self.cctvfolderbtn          = FB(text=' CCTV',on_press=self.on_press)
+        self.startfolderbtn         = FB(text=' startpage',on_press=self.on_press)
+        self.dummy2btn              = FB(text=' ',on_press=self.on_press)
         self.add_widget(self.workfolderbtn)
         self.add_widget(self.commutefolderbtn)
         self.add_widget(self.weeklyreportfolderbtn)
