@@ -1,16 +1,15 @@
-<MyStartBox@MDBoxLayout>:
-    orientation: 'vertical'
-    padding: 5
-    spacing: 5
-    md_bg_color: 0,0,0.15,1
-    #md_bg_color: 0,16/255,38/255,1
-<TopBox@BoxLayout>:
+<MyStartBox>:
+    orientation : 'vertical'
+    padding : 5
+    spacing : 5
+    md_bg_color : 0,0,0.15,1
+<TopBox@MDBoxLayout>:
     orientation: 'horizontal'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,1,0.5
     size_hint: 1, 0.75
-<NotificationBox@MDBoxLayout>: # Bottom Box
+<NotificationBox@MDBoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 0
@@ -18,8 +17,8 @@
     line_color: 0.3,0.3,0.3,1
     line_width: 1
     size_hint: 1, 0.2
-<StatusBox@MDBoxLayout>:
-    orientation: 'vertical'
+<StatusBox>:
+    orientation: 'horizontal'
     padding: 3
     spacing: 0
     #md_bg_color: 0.2,0,0,1
@@ -31,44 +30,56 @@
     orientation: 'vertical'
     padding: 2
     spacing: 5
+    size_hint: 0.63, 1
+
+<TopLeftTopBox@MDBoxLayout>: #MDBoxLayout:
+    orientation:'horizontal'
+    #md_bg_color: 0,0,0.2,1
+    size_hint: 1, 0.2
+    padding: 10
+    spacing: 20
+    line_color: 0.2,0.2,0.2,1
+    line_width: 1
     #md_bg_color: 0,0,0.5,0.5
     #line_color: 0.3,0.3,0.3,1
     #line_width: 1
-    size_hint: 0.63, 1
+<TopLeftBottomGrid@MDGridLayout>:
+    cols : 2
+    size_hint: 1, 0.8
 <TopRightBox@MDBoxLayout>:
     orientation: 'vertical'
     padding: 5
     spacing: 5
     #md_bg_color: 0,0,0.3,1
     size_hint: 0.37, 1
-<MyFilesBox@MDBoxLayout>:
+<MyFilesBox>:
     orientation: 'vertical'
     size_hint: 1,0.2
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0.2,0,1
-<MyCmdsBox@MDBoxLayout>:
+<MyCmdsBox>:
     orientation: 'vertical'
     size_hint: 1,0.25
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0.2,0,1
-<MyFoldersBox@MDGridLayout>:
+<MyFoldersBox>:
     size_hint: 1,0.25
     pos_hint:{'center_x':0.5, 'center_y':0.5}
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0,0.2,1
-<MyServicesBox@MDGridLayout>:
+<MyServicesBox>:
     #orientation: 'vertical'
     size_hint: 1,0.25
     pos_hint:{'center_x':0.5, 'center_y':0.5}
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0.2,0,0,1
-<MyWeeklyReportGrid@MDGridLayout>:
+<MyWeeklyReportGrid>:
     pos_hint:{'center_x':0.47, 'center_y':0.5}
     #md_bg_color: 0.2,0,0,1
-<MyMonthlyReportGrid@MDGridLayout>:
+<MyMonthlyReportGrid>:
     pos_hint:{'center_x':0.47, 'center_y':0.5}
     #md_bg_color: 0.2,0,0,1
-<MyDdayBox@MDBoxLayout>:
+<MyDdayBox>:
     pos_hint:{'center_x':0.52, 'center_y':0.5}
     #md_bg_color: 0.2,0,0,1
 
@@ -79,14 +90,7 @@
     #status: id_status
     TopBox:
         TopLeftBox:
-            MDBoxLayout:
-                orientation:'horizontal'
-                #md_bg_color: 0,0,0.2,1
-                size_hint: 1, 0.2
-                padding: 10
-                spacing: 20
-                line_color: 0.2,0.2,0.2,1
-                line_width: 1
+            TopLeftTopBox: #MDBoxLayout:
                 MyCalendar:
                     id: id_mycal
                     size_hint: 0.4,1
@@ -96,9 +100,7 @@
                     id: id_offworkers
                     size_hint: 0.6,1
                     #pos_hint:{'center_x':0.5,'center_y':0.6}
-            MDGridLayout:
-                cols : 2
-                size_hint: 1, 0.8
+            TopLeftBottomGrid: #MDGridLayout:
                 MDBoxLayout:
                     orientation: 'vertical'
                     size_hint: 0.3,1
@@ -118,8 +120,8 @@
                         id: id_mypatrol
                         pos_hint: {'center_x':0.5, 'center_y':0.75}
                         size_hint: 0.6,0.4
-                        #line_color: 0.2,0.2,0.2,1
-                        #line_width: 1
+                        line_color: 0.2,0.2,0.2,1
+                        line_width: 1
                     MyPostBox:
                         size_hint: 0.8, 0.5
                         pos_hint: {'center_x':0.55, 'center_y':0.25}
@@ -136,10 +138,6 @@
         
     NotificationBox: # Bottom Box
         id: id_notification
-        MDLabel:
-            font_size: 20
-            text: '[color=#005500][b]Notification[/b][/color]'
-            markup: True
         MyWeeklyReportGrid:
         MyMonthlyReportGrid:
         MyDdayBox:
@@ -147,8 +145,4 @@
             Label:
                 text: 'Todo'
     StatusBox:
-        MyLabel:
-            id: id_status
-            text: 'status bar'
-            font_size: 20
-            bold: True
+        id: id_statusbox

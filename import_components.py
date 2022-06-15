@@ -20,6 +20,7 @@ from kivy.config import Config
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.utils import get_color_from_hex as colorhex
 from kivymd.uix.snackbar import Snackbar
+from kivymd.uix.behaviors import RectangularElevationBehavior, FocusBehavior, HoverBehavior
 import calendar
 from datetime import datetime
 from os.path import dirname,join
@@ -29,6 +30,7 @@ from functools import partial
 
 #To get rid of the red dot:
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
+Config.set('graphics','resizable', True)    # XXX for FloatLayout, set resizable True
 #To set the icon so you don’t see the Kivy Icon first:
 #Config.set('kivy', 'window_icon','your_app_icon_64x64.png' )
 #So pressing esc does not close your program:
@@ -48,24 +50,20 @@ def get_color(color,multiply):
 class base:
     fg = 110/255,130/255,150/255,1
     bg = 0,0,0.12,1
-    #bg = 0,16/255,38/255,1
-    icon  = 150/255*0.6, 170/255*0.6, 185/255*0.6, 1
     black  = 0,0,0,1
     white  = 150/255, 170/255, 185/255, 1
+    icon  = get_color(fg, 0.7) #150/255*0.6, 170/255*0.6, 185/255*0.6, 1
+    font_size = 14
+    font_name = 'NotoSerifKR'
 
 class Color:
     class off:
-        day     = 0, 50/255,255/255,1
-        night   = 0, 50/255,255/255,1
-        #night = 110/255,130/255,150/255,1
-        #day   = 0, 70/255, 255/255, 1
-        #night = 0, 70/255, 255/255, 1
+        day     = 0, 120/255,255/255,1
+        night   = 0, 120/255,255/255,1
     class files:
-        #fg   = 0, 150/255,0/255,1
         fg   = 0, 150/255,0/255,1
-        icon   = 0, 100/255,0/255,1
-        #bg   = 0,16/255,38/255,1
         bg   = base.bg
+        icon   = 0, 100/255,0/255,1
     class cmds:
         fg     = 0, 150/255,255/255,1
         icon   = 0, 100/255,255/255,1
@@ -73,16 +71,16 @@ class Color:
         fg   = base.fg
         bg   = 120/255, 120/255, 70/255, 1
     class homenet:
-        fg     = 200/255, 70/255, 0,1
+        fg     = 0, 150/255,255/255,1
         icon   = base.icon
     class vault:
         fg  = base.fg
         icon  = base.icon
     class ev:
-        fg     = 200/255, 70/255, 0,1
+        fg     = 0, 150/255,255/255,1
         icon  = base.icon
     class cctv:
-        fg     = 200/255, 70/255, 0,1
+        fg     = 0, 150/255,255/255,1
         icon  = base.icon
     class door:
         fg  = base.fg
@@ -99,32 +97,49 @@ class Color:
         #past = 0.4,0.4,0.4,1
 
 class MyLabel(MDLabel):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.font_name='NotoSerifKR'
-        self.color = base.fg
-        self.bold = False
-        self.font_size=14
-        self.size = self.texture_size
+    def __init__(self,text_color = base.fg, bold = False, font_size=base.font_size, **kwargs):
+        super().__init__( text_color = text_color, bold = bold, font_size=font_size,**kwargs)
+        self.font_name = base.font_name
+        self.theme_text_color = "Custom"
+        #self.size = self.texture_size
+        #   text_color: 0, 0, 1, 1
         #self.bind(size=self.setter('text_size'))    
 
 class B1(MDFlatButton):
-    def __init__(self,font_size=14,theme_text_color='Custom',line_color=(0,0,0,0),text_color=base.fg,**kwargs):
+    def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
         super().__init__(font_size=font_size,theme_text_color='Custom',line_color=(0,0,0,0),text_color=text_color,**kwargs)
-        self.background_normal = ''
-        self.font_name = 'NotoSerifKR'
+        #self.background_normal = ''
+        self.font_name = base.font_name
 
-class IB1(MDRectangleFlatIconButton):
-    def __init__(self,font_size=14,theme_text_color='Custom',line_color=(0,0,0,0),text_color=base.fg,**kwargs):
+class IB1(MDRectangleFlatIconButton,HoverBehavior):
+    def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
         super().__init__(font_size=font_size,theme_text_color='Custom',line_color=(0,0,0,0),text_color=text_color,**kwargs)
-        self.background_normal = ''
-        self.font_name = 'NotoSerifKR'
+        self.font_name = base.font_name
 
+    def on_enter(self, *args):
+        self.tmp = self.text_color 
+        self.text_color = (1,1,1,1)
+
+    def on_leave(self, *args):
+        self.text_color = self.tmp
+        #self.md_bg_color = self.theme_cls.bg_darkest
+
+class MyCalButton(Button):
+    def __init__(self,font_size=base.font_size,**kwargs):
+        super().__init__(font_size=base.font_size,**kwargs)
+        self.color = base.fg
+        self.background_normal = ''
+        self.background_color = 0,0,0,0
+        #self.font_name = 'NotoSerifKR'
+        #self.background_color = 0,16/255,38/255,1
+        self.font_name = 'GothicA1'
+        self.bold = True
 
 class MyEVButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.icon = "elevator"
+        self.font_name = NotoSerifKRBold
         self.text_color = Color.ev.fg
         self.icon_color = Color.ev.icon
 
@@ -132,6 +147,7 @@ class MyCCTVButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.icon = "cctv"
+        self.font_name = NotoSerifKRBold
         self.text_color = Color.cctv.fg
         self.icon_color = Color.cctv.icon
 
@@ -139,6 +155,7 @@ class MyHomenetButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.icon = "home"
+        self.font_name = NotoSerifKRBold
         self.text_color = Color.homenet.fg
         self.icon_color = Color.homenet.icon
 

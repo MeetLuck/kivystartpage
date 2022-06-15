@@ -246,7 +246,6 @@ def create_commute_csv(date):
             offlist.append(R1C1(r+2,c))            # off  for night
             write.writerow( offlist )
 
-@timeit
 @lru_cache(maxsize=4)
 def get_offworkers(date):
     create_commute_csv(date)

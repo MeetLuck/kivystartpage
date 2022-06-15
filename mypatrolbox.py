@@ -24,8 +24,11 @@ class MyPatrolBox(MDBoxLayout):
         self.orientation='vertical'
         self.padding = 2
         self.spacing = 1
+        print("========> My Patrol Box")
         self.create_layout()
+        print("========> My Patrol Box : create layout")
         self.update()
+        print("========> My Patrol Box : update")
 
     def create_row(self,patrol):
         self.grid = patrolG() 
@@ -34,7 +37,8 @@ class MyPatrolBox(MDBoxLayout):
         self.add_widget(self.grid)
 
     def create_layout(self):
-        daynight = get_dayornight(datetime.now())
+        now = datetime.now()
+        daynight = get_dayornight(now)
         #dayornight=['day1','day2','night1','night2','off1','off2']
         if daynight in ['day1','day2']:
             self.create_row('09 2 6 9'.split())
@@ -43,13 +47,16 @@ class MyPatrolBox(MDBoxLayout):
             self.create_row('13 2 6 9'.split())
             self.create_row('14 1 5 8'.split())
             self.create_row('15 3 7 10'.split())
-        elif daynight in ['night1','night2']:
+        elif daynight in ['night1','night2'] or ( daynight == 'off1' and now.hour <= 6 ):
             self.create_row('23 2 6 9'.split())
             self.create_row('24 1 5 8'.split())
             self.create_row('01 3 7 10'.split())
             self.create_row('02 2 6 9'.split())
             self.create_row('03 1 5 8'.split())
             self.create_row('04 3 7 10'.split())
+        else:
+            self.create_row('Not Work Time now'.split())
+
 
     def reset_grid(self,grid):
         grid.md_bg_color = 0,51/255,255/255,1

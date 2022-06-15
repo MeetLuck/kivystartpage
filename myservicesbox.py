@@ -13,10 +13,10 @@ class MyServicesBox(MDGridLayout):
 
     def create_layout(self):
         #print(minwonfile)
-        self.evbtn         = MyEVButton(text='EV:1899-7144',on_press=self.on_press)
-        self.homenetbtn    = MyHomenetButton(text='홈넷:1111',on_press=self.on_press)
-        self.vaultbtn      = MyVaultButton(text='금고:1234',on_press=self.on_press)
-        self.cctvbtn       = MyCCTVButton(text='CCTV:1566-7896 ',on_press=self.on_press)
+        self.evbtn         = MyEVButton(text='EV 1899-7144',on_press=self.on_press)
+        self.homenetbtn    = MyHomenetButton(text='홈넷1111',on_press=self.on_press)
+        self.vaultbtn      = MyVaultButton(text='금고1234',on_press=self.on_press)
+        self.cctvbtn       = MyCCTVButton(text='CCTV 1566-7896 ',on_press=self.on_press)
         self.doorbtn       = MyDoorButton(text='세대현관',on_press=self.on_press)
         self.contactbtn    = MyContactButton(text='직원연락처',on_press=self.on_press)
         self.a1Fmapbtn     = MyMapButton(text='1F(지도)',on_press=self.on_press)

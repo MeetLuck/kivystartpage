@@ -1,6 +1,5 @@
 from import_components import *
 
-        
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -27,7 +26,6 @@ class MyGrid(GridLayout):
         self.dayworkers.text    = off[2]
         self.nightteam.text     = off[3]
         self.nightworkers.text  = off[4]
-
 
 class OffBox(MDBoxLayout):
 
