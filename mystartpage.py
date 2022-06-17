@@ -10,6 +10,8 @@ from mypostbox import *
 from mypatrolbox import *
 from mymoveinout import *
 from mystatusbox import *
+from applicationbox import *
+from mypostgrid import *
 import time
 
 Window.size = 1200,900
@@ -21,6 +23,7 @@ class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         #md_bg_color: 0,16/255,38/255,1
+        self.md_bg_color = base.bg
         self.status = self.ids['id_statusbox']
         self.mainstatus = self.status.statuslabel
         self.selectstatus =self.status.selectlabel
@@ -67,6 +70,7 @@ class MyStartBox(MDBoxLayout):
         self.offworkers.update(date)
         self.myfiles.update(date)
         self.commutefile = get_monthlycommutefile(self.date)
+        #print(self.date, type(self.date))
         self.dailyreportfile = get_dailyreportfile(self.date)[0]
 
     def update_time(self,*args):
@@ -76,7 +80,6 @@ class MyStartBox(MDBoxLayout):
     def update(self):
         self.update_date(self.mycalendar.date)
         self.update_time()
-
 
 class Mystartpage(MDApp):
 

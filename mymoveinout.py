@@ -1,14 +1,15 @@
 from import_components import *
 
-class moveB(Button):
+class MoveButton(IB1):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.font_name = 'NotoSerifKR'
         self.bold = True
-        self.color = base.fg
-        self.background_normal = ''
-        self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
-        self.font_size = 14
+        #self.color = Color.files.fg
+        #self.background_color = Color.files.bg
+        #self.text_color = Color.cmds.fg
+        self.icon_color = base.fg
+        #self.font_size = 16
 
 class patrolG(MDGridLayout):
     def __init__(self,**kwargs):
@@ -22,7 +23,7 @@ class MoveInOutBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.orientation='vertical'
-        self.padding = 2
+        self.padding = 0
         self.spacing = 1
         self.create_layout()
         self.update()
@@ -30,17 +31,18 @@ class MoveInOutBox(MDBoxLayout):
 
     def create_layout(self):
         # create move-in,out button
-        self.add_widget( moveB(text='전출입 및 승강기 현황'))
-        # create interior button
-        self.add_widget( moveB(text='세대공사'))
-        # create dong-information button
-        self.add_widget( moveB(text='동별세대수 및 공동현관문'))
-        # create protection button 
-        self.add_widget( moveB(text='보양재 현황'))
-        # create interfloor noise button
-        self.add_widget( moveB(text='층간소음'))
+        self.movin      = MoveButton(text='전출입 및 승강기 현황',    icon='truck-outline',on_press=self.on_press)
+        self.interior   = MoveButton(text='세대공사',                 icon='tools',on_press=self.on_press)
+        self.donginfo   = MoveButton(text='동별 세대수 및 공동현관문',icon='home-city',on_press=self.on_press)
+        self.protectev  = MoveButton(text='보양재 현황',              icon='elevator-passenger-outline',on_press=self.on_press)
+        self.internoise = MoveButton(text='층간소음',                 icon='bullhorn-outline',on_press=self.on_press)
+        self.add_widget(self.movin)
+        self.add_widget(self.interior)
+        self.add_widget(self.donginfo)
+        self.add_widget(self.internoise)
 
-
+    def on_press(self,*args):
+        ...
     def update(self):
         ...
 

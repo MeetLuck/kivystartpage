@@ -38,20 +38,25 @@ class MyPatrolBox(MDBoxLayout):
 
     def create_layout(self):
         now = datetime.now()
-        if 6 <= now.hour < 16:  # daytime
+        daynight = get_dayornight(now)
+        #dayornight=['day1','day2','night1','night2','off1','off2']
+        if daynight in ['day1','day2']:
             self.create_row('09 2 6 9'.split())
             self.create_row('10 1 5 8'.split())
             self.create_row('11 3 7 10'.split())
             self.create_row('13 2 6 9'.split())
             self.create_row('14 1 5 8'.split())
             self.create_row('15 3 7 10'.split())
-        if now.hour > 16 or now.hour < 6:
+        elif daynight in ['night1','night2'] or ( daynight == 'off1' and now.hour <= 6 ):
             self.create_row('23 2 6 9'.split())
             self.create_row('24 1 5 8'.split())
             self.create_row('01 3 7 10'.split())
             self.create_row('02 2 6 9'.split())
             self.create_row('03 1 5 8'.split())
             self.create_row('04 3 7 10'.split())
+        else:
+            self.create_row('Not Work Time now'.split())
+
 
     def reset_grid(self,grid):
         grid.md_bg_color = 0,51/255,255/255,1

@@ -1,10 +1,4 @@
 from import_components import *
-import sys
-sys.path.append('../kivystartpage')
-
-Window.size = 300,120
-
-
 class MyCalendar(MDBoxLayout):
 
     now = datetime.now()
@@ -24,7 +18,7 @@ class MyCalendar(MDBoxLayout):
     def create_layout(self):
         self.create_month_box()
         self.rightgrid = GridLayout(size_hint =( 0.75,1), padding = 0, spacing = 0, rows = 7, cols = 7)
-        self.add_widget(self.leftbox)
+        self.add_widget(self.monthbox)
         self.add_widget(self.rightgrid)
         #self.create_weekdays()
         self.create_dates()
@@ -32,26 +26,24 @@ class MyCalendar(MDBoxLayout):
         print(self.unsel.bg)
 
     def create_month_box(self):
-        self.leftbox = BoxLayout( size_hint = (0.25,1), orientation='vertical' )
-        self.box1 = BoxLayout( size_hint =(1,0.28), orientation='horizontal')
+        self.monthbox = BoxLayout( size_hint = (0.25,1), orientation='vertical' )
+        self.monthctrlbox = BoxLayout( size_hint =(1,0.28), orientation='horizontal')
         self.minusbutton = MyCalButton(bold=True, markup=True, text = '[size=16][b]<[/b][/size]')
         self.plusbutton =  MyCalButton(bold=True, markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
         self.minusbutton.bind(on_release = partial(self.on_change_month,-1) )
         self.plusbutton.bind(on_release  = partial(self.on_change_month,+1)  )
-        self.box1.add_widget(self.minusbutton)
-        self.box1.add_widget(self.plusbutton)
+        self.monthctrlbox.add_widget(self.minusbutton)
+        self.monthctrlbox.add_widget(self.plusbutton)
         self.monthbutton = MyCalButton( size_hint = (1,0.72), color = base.fg,bold = True, text = str(self.month))
         self.monthbutton.font_size = self.monthbutton.height * 0.65
         #self.monthbutton.color = base.fg
-        self.leftbox.add_widget(self.box1)
-        self.leftbox.add_widget(self.monthbutton)
+        self.monthbox.add_widget(self.monthctrlbox)
+        self.monthbox.add_widget(self.monthbutton)
 
     def create_weekdays(self):
         for col,weekday in enumerate('SUN MON TUS WED THU FRI SAT'.split()):
             button = Button(text=weekday)
             button.font_size = 12
-            #button.background_color = 0,0,0.15,1
-            #button.background_normal=''
             if weekday == 'SUN':   button.color = 0.5,0,0,1
             elif weekday == 'SAT': button.color = 0,0,0.5,1
             else:                  button.color = 0.5,0.5,0.5,1

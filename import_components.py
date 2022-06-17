@@ -21,6 +21,7 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.utils import get_color_from_hex as colorhex
 from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.behaviors import RectangularElevationBehavior, FocusBehavior, HoverBehavior
+from kivymd.uix.dialog import MDDialog
 import calendar
 from datetime import datetime
 from os.path import dirname,join
@@ -35,6 +36,8 @@ Config.set('graphics','resizable', True)    # XXX for FloatLayout, set resizable
 #Config.set('kivy', 'window_icon','your_app_icon_64x64.png' )
 #So pressing esc does not close your program:
 #Config.set('kivy', 'exit_on_escape', 0)
+# to remove title bar
+Config.set('graphics','fullscreen', 'fake')    # XXX for FloatLayout, set resizable True
 
 # XXX fonts
 fonts= join( dirname(__file__),'fonts')
@@ -50,6 +53,7 @@ def get_color(color,multiply):
 class base:
     fg = 110/255,130/255,150/255,1
     bg = 0,0,0.12,1
+    #bg = 82/255, 82/255, 94/255,1
     black  = 0,0,0,1
     white  = 150/255, 170/255, 185/255, 1
     icon  = get_color(fg, 0.7) #150/255*0.6, 170/255*0.6, 185/255*0.6, 1
@@ -113,7 +117,7 @@ class B1(MDFlatButton):
 
 class IB1(MDRectangleFlatIconButton,HoverBehavior):
     def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
-        super().__init__(font_size=font_size,theme_text_color='Custom',line_color=(0,0,0,0),text_color=text_color,**kwargs)
+        super().__init__(font_size=font_size,theme_text_color='Custom',line_color=line_color,text_color=text_color,**kwargs)
         self.font_name = base.font_name
 
     def on_enter(self, *args):
