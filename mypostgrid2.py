@@ -1,7 +1,7 @@
 from import_components import *
 from dong_data import *
 
-class PostButton(Button,HoverBehavior):
+class PostButton(Button):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.font_name = 'NotoSerifKR'
@@ -11,13 +11,6 @@ class PostButton(Button,HoverBehavior):
         self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
         #self.md_bg_color = base.bg
         self.font_size = 14
-
-    def on_enter(self, *args):
-        self.tmp = self.color 
-        self.color = (1,1,1,1)
-
-    def on_leave(self, *args):
-        self.color = self.tmp
 
 class PopLabel(MDLabel):
     def __init__(self,text_color = base.fg, bold = False, font_size=base.font_size, **kwargs):
@@ -34,7 +27,7 @@ class PopLabel(MDLabel):
 class Content(MDGridLayout):
     def __init__(self,button,**kwargs):
         super().__init__(**kwargs)
-        self.cols = 16
+        self.cols = 15
         self.rows = 2
         #self.size_hint_x = None
         self.size_hint_y = None
@@ -46,14 +39,14 @@ class Content(MDGridLayout):
         self.create_layout(dong)
 
     def create_layout(self,dong):
-        headings = '동 세대  층  EV1  보양재  초소  1F   B1a   B1b   B2a   B2b  B1c   B1d   B2c   B2d  9010'.split()
+        headings = '세대  층  EV1  보양재  초소  1F   B1a   B1b   B2a   B2b  B1c   B1d   B2c   B2d  9010'.split()
         for text in headings:
             self.add_widget( PopLabel(text=text) )
         dong_index = find_dong(dong)
         dong_list = dong_sedae_floor_post_ev[dong_index]
         #print(btn.text , dong_index)
         print('===>', dong_list, len(dong_list) )
-        for text in dong_list[:]:
+        for text in dong_list[1:]:
             self.add_widget( PopLabel(text=str(text)) )
 
 
@@ -72,7 +65,6 @@ class MyPostGrid(MDGridLayout):
         self.cols = 1
         self.rows = 9
         self.create_layout()
-        self.modalview = ModalView(size_hint=(None,None),size=(1000,200), background='',background_color=(0,0,1,0),auto_dismiss=True)
         self.update()
 
     def create_row(self,patrol):
@@ -83,11 +75,9 @@ class MyPostGrid(MDGridLayout):
 
     def on_press(self,btn):
         # create content and add to the popup
-        #self.dialog = MDDialog( title='',size_hint=(None, None), width = 1200, md_bg_color = base.bg ,type="custom", content_cls=Content(btn), buttons=[ ])
-        #self.dialog.font_name = 'NotoSerifKR'
-        #self.dialog.open()
-        self.modalview.add_widget(Content(btn))
-        self.modalview.open()
+        self.dialog = MDDialog( title='',size_hint=(None, None), width = 1200, md_bg_color = base.bg ,type="custom", content_cls=Content(btn), buttons=[ ])
+        self.dialog.font_name = 'NotoSerifKR'
+        self.dialog.open()
         print(btn.text)
 
     def create_layout(self):

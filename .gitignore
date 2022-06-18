@@ -1,0 +1,5 @@
+# python directory 
+__pycache__
+# ~
+*.xlsx
+*.db

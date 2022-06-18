@@ -1,5 +1,14 @@
 from import_components import *
 
+class OffLabel(Label):
+    def __init__(self,color = base.fg, bold = False, font_size=14, **kwargs):
+        super().__init__( color = color, bold = bold, font_size=font_size,**kwargs)
+        self.font_name = base.font_name
+        #self.theme_text_color = "Custom"
+        self.size = self.texture_size
+        #   text_color: 0, 0, 1, 1
+        self.bind(size=self.setter('text_size'))    
+
 class MyGrid(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -9,11 +18,11 @@ class MyGrid(GridLayout):
         self.create_layout()
 
     def create_layout(self):
-        self.theday       = MyLabel(text='0',size_hint=(0.25,1),halign= 'center')
-        self.dayteam      = MyLabel(text='1',size_hint=(0.1,1),halign= 'center')
-        self.dayworkers   = MyLabel(text='2',size_hint=(0.3,1),halign='left')
-        self.nightteam    = MyLabel(text='3',size_hint=(0.1,1),halign='center')
-        self.nightworkers = MyLabel(text='4',size_hint=(0.3,1),halign='left')
+        self.theday       = OffLabel(text='0',size_hint=(0.25,1),halign= 'center')
+        self.dayteam      = OffLabel(text='1',size_hint=(0.1,1),halign= 'center')
+        self.dayworkers   = OffLabel(text='2',size_hint=(0.3,1),halign='left')
+        self.nightteam    = OffLabel(text='3',size_hint=(0.1,1),halign='center')
+        self.nightworkers = OffLabel(text='4',size_hint=(0.3,1),halign='left')
         self.add_widget(self.theday)
         self.add_widget(self.dayteam)
         self.add_widget(self.dayworkers)

@@ -14,7 +14,7 @@ from applicationbox import *
 from mypostgrid import *
 import time
 
-Window.size = 1200,900
+Window.size = 1250,900
 Window.top = 80
 Window.left = 350
 #Window.borderless = True
@@ -51,18 +51,24 @@ class MyStartBox(MDBoxLayout):
         if keycode[1] == str(7): os.startfile(commutefolder)
         if keycode[1] == str(8): os.startfile(weeklyworkfolder)
         if keycode[1] == str(9): os.system('explorer.exe /n,{}'.format(infofolder) )
+        if keycode[1] == 'f':    os.startfile('firefox')
+        if keycode[1] == 'p':    os.startfile('mspaint')
+        if keycode[1] == 's':    os.startfile('snippingtool')
 
     def key_down(self,keyboard, keycode, text, modifiers):
         # (49, '1')
-        if keycode[1] == str(1): self.mainstatus.text = f'opening {minwonfile}'
-        if keycode[1] == str(2): self.mainstatus.text = f'opening {self.dailyreportfile}'
-        if keycode[1] == str(3): self.mainstatus.text = f'opening {self.commutefile}'
+        if keycode[1] == str(1): self.mainstatus.text = f'loading {minwonfile}'
+        if keycode[1] == str(2): self.mainstatus.text = f'loading {self.dailyreportfile}'
+        if keycode[1] == str(3): self.mainstatus.text = f'loading {self.commutefile}'
         if keycode[1] == str(4): self.mainstatus.text = f'python {minwonpyfile}'
-        if keycode[1] == str(5): self.mainstatus.text = f'opening {hpscanfile}'
-        if keycode[1] == str(6): self.mainstatus.text = f'opening {workfolder}'
-        if keycode[1] == str(7): self.mainstatus.text = f'opening {commutefolder}'
-        if keycode[1] == str(8): self.mainstatus.text = f'opening {weeklyworkfolder}'
-        if keycode[1] == str(9): self.mainstatus.text = f'opening {infofolder}'
+        if keycode[1] == str(5): self.mainstatus.text = f'loading {hpscanfile}'
+        if keycode[1] == str(6): self.mainstatus.text = f'loading {workfolder}'
+        if keycode[1] == str(7): self.mainstatus.text = f'loading {commutefolder}'
+        if keycode[1] == str(8): self.mainstatus.text = f'loading {weeklyworkfolder}'
+        if keycode[1] == str(9): self.mainstatus.text = f'loading {infofolder}'
+        if keycode[1] == 'f':    self.mainstatus.text = f'loading firefox'
+        if keycode[1] == 'p':    self.mainstatus.text = f'loading paint'
+        if keycode[1] == 's':    self.mainstatus.text = f'loading snippingtool'
 
     def update_date(self,date:tuple):
         self.date = datetime(*date )

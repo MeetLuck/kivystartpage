@@ -22,6 +22,7 @@ from kivy.utils import get_color_from_hex as colorhex
 from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.behaviors import RectangularElevationBehavior, FocusBehavior, HoverBehavior
 from kivymd.uix.dialog import MDDialog
+from kivy.uix.modalview import ModalView
 import calendar
 from datetime import datetime
 from os.path import dirname,join
@@ -101,13 +102,13 @@ class Color:
         #past = 0.4,0.4,0.4,1
 
 class MyLabel(MDLabel):
-    def __init__(self,text_color = base.fg, bold = False, font_size=base.font_size, **kwargs):
+    def __init__(self,text_color = base.fg, bold = False, font_size=10, **kwargs):
         super().__init__( text_color = text_color, bold = bold, font_size=font_size,**kwargs)
         self.font_name = base.font_name
         self.theme_text_color = "Custom"
-        #self.size = self.texture_size
+        self.size = self.texture_size
         #   text_color: 0, 0, 1, 1
-        #self.bind(size=self.setter('text_size'))    
+        self.bind(size=self.setter('text_size'))    
 
 class B1(MDFlatButton):
     def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
