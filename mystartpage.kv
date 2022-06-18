@@ -110,13 +110,13 @@
     line_color: 0.2,0.2,0.2,1
     line_width: 5
 
-<MyPatrolBox>:
-    pos_hint: {'center_x':0.5, 'center_y':0.77}
+<ApplicationBox>:
+    orientation: 'vertical'
     line_color: 0.2,0.2,0.2,1
     line_width: 1
 
-<ApplicationBox>:
-    orientation: 'vertical'
+<MyPatrolBox>:
+    pos_hint: {'center_x':0.5, 'center_y':0.77}
     line_color: 0.2,0.2,0.2,1
     line_width: 1
 
@@ -146,7 +146,7 @@
                 DongInfoBox:
                     size_hint: 0.3,1
                     MoveInOutBox: # 전출입 및 승강기 사용현황
-                        size_hint: 1,0.35
+                        size_hint: 1,0.4
                     ApplicationBox:
                         size_hint: 1,0.25
                     MDBoxLayout:

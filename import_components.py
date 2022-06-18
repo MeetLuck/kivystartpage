@@ -52,12 +52,18 @@ def get_color(color,multiply):
     return list(map(lambda c : c * multiply, color[:-1])) + [1]
 
 class base:
-    fg = 110/255,130/255,150/255,1
-    bg = 0,0,0.12,1
+    fg   = 110/255,130/255,150/255,1
+    fg1  = 0, 150/255,255/255,1
+    fg2  = 100/255, 150/255,0,1
+    fg3  = 255/255, 150/255,0,1
+    bg   = 0,0,0.12,1
+    bg1  = 0, 50/255, 150/255,1
+    bg2  = 0, 10/255, 60/255,1
     #bg = 82/255, 82/255, 94/255,1
     black  = 0,0,0,1
     white  = 150/255, 170/255, 185/255, 1
     icon  = get_color(fg, 0.7) #150/255*0.6, 170/255*0.6, 185/255*0.6, 1
+    icon1 = get_color(fg,1.2)
     font_size = 14
     font_name = 'NotoSerifKR'
 
@@ -117,8 +123,8 @@ class B1(MDFlatButton):
         self.font_name = base.font_name
 
 class IB1(MDRectangleFlatIconButton,HoverBehavior):
-    def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
-        super().__init__(font_size=font_size,theme_text_color='Custom',line_color=line_color,text_color=text_color,**kwargs)
+    def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,icon_color=base.icon,**kwargs):
+        super().__init__(font_size=font_size,theme_text_color='Custom',line_color=line_color,text_color=text_color,icon_color=icon_color,**kwargs)
         self.font_name = base.font_name
 
     def on_enter(self, *args):

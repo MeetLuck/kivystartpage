@@ -2,7 +2,6 @@ from import_components import *
 from dong_data import *
 
 class PostButton(Button,HoverBehavior):
-
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.font_name = 'NotoSerifKR'
@@ -10,7 +9,8 @@ class PostButton(Button,HoverBehavior):
         self.color = base.fg #get_color(base.fg,0.6) #fg = 110/255,130/255,150/255,1
         self.background_normal = ''
         self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
-        self.font_size = 16
+        #self.md_bg_color = base.bg
+        self.font_size = 14
 
     def on_enter(self, *args):
         self.tmp = self.color 
@@ -18,6 +18,25 @@ class PostButton(Button,HoverBehavior):
 
     def on_leave(self, *args):
         self.color = self.tmp
+
+class MDPostButton(MDFlatButton,HoverBehavior): # XXX to large space
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.font_name = 'NotoSerifKR'
+        self.bold = True
+        self.text_color = base.fg #get_color(base.fg,0.6) #fg = 110/255,130/255,150/255,1
+        #self.background_normal = ''
+        #self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
+        #self.md_bg_color = base.bg
+        self.theme_text_color='Custom'
+        self.font_size = 12
+
+    def on_enter(self, *args):
+        self.tmp = self.text_color 
+        self.text_color = (1,1,1,1)
+
+    def on_leave(self, *args):
+        self.text_color = self.tmp
 
 class PopLabel(MDLabel):
     def __init__(self,text_color = base.fg, bold = False, font_size=base.font_size, **kwargs):
@@ -68,6 +87,7 @@ class MyPostGrid(MDGridLayout):
         super().__init__(**kwargs)
         self.cols = 1
         self.rows = 9
+        self.posts = [1,2,3,5,6,7,8,9,10]
         self.create_layout()
         self.modalview = ModalView(size_hint=(None,None),size=(1000,200), background='',background_color=(0,0,1,0),auto_dismiss=True)
         self.update()
@@ -103,10 +123,10 @@ class MyPostGrid(MDGridLayout):
         # XXX 
         # idx           -> 0,1,2,3,4,5,6,7,8,9
         # skip post 4   -> 1,2,3,5,6,7,8,9,10 
-        return posts[idx]
+        return self.posts[idx]
 
     def is_post(self,button):
-        if int(button.text) in posts:
+        if int(button.text) in self.posts:
             return True
         else:
             return False
@@ -122,16 +142,9 @@ class MyPostGrid(MDGridLayout):
                     button.color = get_color(base.fg, 0.7)
                     continue
                 if button.text in map(str,dongs):
-                    button.color = get_color(base.fg, 0.85)
-                    if find_ev1(button.text):
-                        button.color = get_color(base.fg1,0.7)
-                    if find_use_ev2(button.text):
-                        button.text += '*'
-                        #button.color = get_color(base.fg2, 0.8)
-
+                    button.color = base.fg
                 else:
-                    button.color = get_color(base.fg,0.4)
-                    button.bold = False
+                    button.color = get_color(base.fg,0.5)
 
 if __name__ == '__main__':
     Window.size = 1200,250

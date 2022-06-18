@@ -51,6 +51,7 @@ dong_sedae_floor_post_ev = [
 [143,       4,  26 , 2, '143-2',  9,  9001,  9002,  9003,   '',     '',     '',   '',   '',   '',   ''],
 [144,       2,  26 , 1,      '',  9,  9001,  9002,  9003,   '',     '',     '',   '',   '',   '',   ''] ]
 
+posts = [1,2,3,5,6,7,8,9,10]
 # 111   :  22~28
 # 112   :  22~28
 # 127   :  21~ 27
@@ -80,6 +81,7 @@ def find_must_ev2(dong):
         if dong in map(str,dong_record):
             return str( dong_record[4] ) 
     return ''
+find_use_ev2 = find_must_ev2
 
 def get_dongsforpost(post:int)->list:
     dongs = list()

@@ -1,11 +1,5 @@
 from import_components import *
 
-class XlButton(IB1):
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
-        self.text_color = Color.files.fg
-        self.icon_color = Color.files.icon
-
 class MyFilesBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
@@ -14,13 +8,11 @@ class MyFilesBox(MDBoxLayout):
         self.create_layout()
 
     def create_layout(self):
-        self.minwonbtn          =  XlButton(text='민원처리내역.xlsx',  icon  =  'numeric-1-circle',on_press=self.on_press)
-        self.dailyreportbtn1    =  XlButton(text='dailyreportfile1',   icon  =  'numeric-2-circle',on_press=self.on_press)
-        #self.dailyreportbtn2    =  XlButton(text='dailyreportfile2',   icon  =  'microsoft-excel', on_press=self.on_press)
-        self.monthlycommutebtn  =  XlButton(text='monthlycommutefile', icon  =  'numeric-3-circle',on_press=self.on_press)
+        self.minwonbtn          =  IB1(text='민원처리내역.xlsx',  icon = 'numeric-1-circle-outline',icon_color=base.icon1,on_press=self.on_press)
+        self.dailyreportbtn1    =  IB1(text='dailyreportfile1',   icon = 'numeric-2-circle-outline',icon_color=base.icon1,on_press=self.on_press)
+        self.monthlycommutebtn  =  IB1(text='monthlycommutefile', icon = 'numeric-3-circle-outline',icon_color=base.icon1,on_press=self.on_press)
         self.add_widget(self.minwonbtn)
         self.add_widget(self.dailyreportbtn1)
-        #self.add_widget(self.dailyreportbtn2)
         self.add_widget(self.monthlycommutebtn)
 
     def on_press(self,btn):
