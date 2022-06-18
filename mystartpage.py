@@ -25,6 +25,8 @@ class MyStartBox(MDBoxLayout):
         #md_bg_color: 0,16/255,38/255,1
         self.md_bg_color = base.bg
         self.status = self.ids['id_statusbox']
+        self.weeklyreport = self.ids['id_weeklyreport']
+        self.monthlyreport = self.ids['id_monthlyreport']
         self.mainstatus = self.status.statuslabel
         self.selectstatus =self.status.selectlabel
         self.timestatus =self.status.timelabel
@@ -78,6 +80,8 @@ class MyStartBox(MDBoxLayout):
         self.commutefile = get_monthlycommutefile(self.date)
         #print(self.date, type(self.date))
         self.dailyreportfile = get_dailyreportfile(self.date)[0]
+        self.weeklyreport.update(self.date)
+        self.monthlyreport.update(self.date)
 
     def update_time(self,*args):
         self.patrol.update()

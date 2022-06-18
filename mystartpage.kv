@@ -58,7 +58,6 @@
     cols : 2
     size_hint: 1, 0.8
 
-
 <MyFilesBox>:
     orientation: 'vertical'
     size_hint: 1,0.2
@@ -168,9 +167,10 @@
             MyServicesBox:
         
     NotificationBox: # Bottom Box
-        id: id_notification
-        MyWeeklyReportGrid:
-        MyMonthlyReportGrid:
+        MyWeeklyReportGrid: 
+            id: id_weeklyreport
+        MyMonthlyReportGrid: 
+            id: id_monthlyreport
         MyDdayBox:
         MDBoxLayout:
             Label:
