@@ -7,12 +7,13 @@ class MyCalendar(MDBoxLayout):
     TextCalendar = calendar.TextCalendar(calendar.SUNDAY)
     #unsel = type("unselect", (), {'bg':(0,16/255,38/255,1)})
     unsel = type("unselect", (), {'bg':(0,0,0,0)})
-    sel = type("select", (), {'bg':(0.3,0.3,0.3,1)})
+    sel = type("select", (), {'bg':(0.2,0.2,0.1,1)})
     today = type("today", (), {'fg':(0,0.8,0,1)})
 
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.orientation = 'horizontal'
+        self.root = MDApp.get_running_app().root
         self.create_layout()
         self.date = self.year, self.month, self.day
 
@@ -21,23 +22,20 @@ class MyCalendar(MDBoxLayout):
         self.rightgrid = GridLayout(size_hint =( 0.75,1), padding = 0, spacing = 0, rows = 7, cols = 7)
         self.add_widget(self.monthbox)
         self.add_widget(self.rightgrid)
-        #self.create_weekdays()
         self.create_dates()
-        #self.update_dates(self.year,self.month)
         print(self.unsel.bg)
 
     def create_month_box(self):
         self.monthbox = BoxLayout( size_hint = (0.25,1), orientation='vertical' )
         self.monthctrlbox = BoxLayout( size_hint =(1,0.28), orientation='horizontal')
-        self.minusbutton = MyCalButton(bold=True, markup=True, text = '[size=16][b]<[/b][/size]')
-        self.plusbutton =  MyCalButton(bold=True, markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
+        self.minusbutton = B1(bold=True, markup=True, text = '[size=16][b]<[/b][/size]')
+        self.plusbutton =  B1(bold=True, markup=True, text = '[size=16][b]>[/b][/size]')#, on_release = self.on_change_month(+1) )
         self.minusbutton.bind(on_release = partial(self.on_change_month,-1) )
         self.plusbutton.bind(on_release  = partial(self.on_change_month,+1)  )
         self.monthctrlbox.add_widget(self.minusbutton)
         self.monthctrlbox.add_widget(self.plusbutton)
-        self.monthbutton = MyCalButton( size_hint = (1,0.72), color = base.fg,bold = True, text = str(self.month))
+        self.monthbutton = B1( size_hint = (1,0.72), color = base.fg,bold = True, text = str(self.month), on_press=self.on_press)
         self.monthbutton.font_size = self.monthbutton.height * 0.65
-        #self.monthbutton.color = base.fg
         self.monthbox.add_widget(self.monthctrlbox)
         self.monthbox.add_widget(self.monthbutton)
 
@@ -53,9 +51,9 @@ class MyCalendar(MDBoxLayout):
     def create_dates(self):
         for row in range(1,6+1):
             for col in range(7):
-                button = MyCalButton()
+                button = B1()
                 #button.background_color = 0,0,0,1
-                button.bind(on_press = self.on_click)
+                button.bind(on_press = self.on_press)
                 id = f'rc{row}{col}'
                 self.ids[id] = button 
                 self.rightgrid.add_widget(button)
@@ -98,16 +96,24 @@ class MyCalendar(MDBoxLayout):
             if col == 6: row += 1
             #print(id,button.text)
 
-    def on_click(self,btn):
+    def on_press(self,btn):
+        root = MDApp.get_running_app().root
+        if btn == self.monthbutton:
+            month = int(btn.text)
+            commutefile = get_monthlycommutefile( datetime(self.year,month,1) )
+            print(root, commutefile)
+            root.mainstatus.text = f'loading {commutefile}'
+            os.startfile(commutefile)
+            return
+
         for id in self.ids:
             if self.ids[id] == btn:
                 btn.background_color = self.sel.bg
             else:
                 self.ids[id].background_color = self.unsel.bg
-        root = MDApp.get_running_app().root
         self.date = self.year,self.month,int(btn.text)
-        print('=========================',self.date)
         root.update_date(self.date)
+        print('=========================',self.date)
 
     def on_change_month(self,nextmonth,btn):
         print('==>',nextmonth)

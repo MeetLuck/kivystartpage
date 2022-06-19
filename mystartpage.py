@@ -22,7 +22,6 @@ Window.left = 350
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
-        #md_bg_color: 0,16/255,38/255,1
         self.md_bg_color = base.bg
         self.status = self.ids['id_statusbox']
         self.weeklyreport = self.ids['id_weeklyreport']
@@ -31,6 +30,7 @@ class MyStartBox(MDBoxLayout):
         self.selectstatus =self.status.selectlabel
         self.timestatus =self.status.timelabel
         self.patrol = self.ids['id_mypatrol']
+        self.post = self.ids['id_post']
         self.update()
         self.app = MDApp.get_running_app()
         self._keyboard = Window.request_keyboard(self.keyboard_closed, self)
@@ -78,7 +78,6 @@ class MyStartBox(MDBoxLayout):
         self.offworkers.update(date)
         self.myfiles.update(date)
         self.commutefile = get_monthlycommutefile(self.date)
-        #print(self.date, type(self.date))
         self.dailyreportfile = get_dailyreportfile(self.date)[0]
         self.weeklyreport.update(self.date)
         self.monthlyreport.update(self.date)

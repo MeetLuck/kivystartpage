@@ -1,23 +1,6 @@
 from import_components import *
 from dong_data import *
 
-class PostButton(Button,HoverBehavior):
-
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
-        self.font_name = 'NotoSerifKR'
-        self.bold = True
-        self.color = base.fg #get_color(base.fg,0.6) #fg = 110/255,130/255,150/255,1
-        self.background_normal = ''
-        self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
-        self.font_size = 16
-
-    def on_enter(self, *args):
-        self.tmp = self.color 
-        self.color = (1,1,1,1)
-
-    def on_leave(self, *args):
-        self.color = self.tmp
 
 class PopLabel(MDLabel):
     def __init__(self,text_color = base.fg, bold = False, font_size=base.font_size, **kwargs):
@@ -31,7 +14,7 @@ class PopLabel(MDLabel):
         #self.bind(size=self.setter('text_size'))    
 
 class Content(MDGridLayout):
-    def __init__(self,button,**kwargs):
+    def __init__(self,dong,**kwargs):
         super().__init__(**kwargs)
         self.cols = 16
         self.rows = 2
@@ -41,7 +24,6 @@ class Content(MDGridLayout):
         self.height = 100
         self.md_bg_color = base.bg
         #self.md_bg_color = 0,0,0,0
-        dong = button.text
         self.create_layout(dong)
 
     def create_layout(self,dong):
@@ -68,20 +50,25 @@ class MyPostGrid(MDGridLayout):
         super().__init__(**kwargs)
         self.cols = 1
         self.rows = 9
+        self.dong_list = ''
         self.create_layout()
         self.modalview = ModalView(size_hint=(None,None),size=(1000,200), background='',background_color=(0,0,1,0),auto_dismiss=True)
-        self.update()
 
     def create_row(self,patrol):
         self.grid = Grid1x10() 
         for text in patrol:
-            self.grid.add_widget( PostButton( text= text,on_press = self.on_press ) )
+            self.grid.add_widget( B1( text= text,on_press = self.on_press ) )
         self.add_widget(self.grid)
 
-    def on_press(self,btn):
-        self.modalview.add_widget(Content(btn))
+    def on_press(self,button):
+        dong = button.text[:3] # XXX 101*
+        if is_post(dong):
+            print(f'it is post {dong}')
+            return
+        self.update(dong)
+        self.modalview.add_widget(Content(dong))
         self.modalview.open()
-        print(btn.text)
+        print(button.text)
 
     def create_layout(self):
         self.create_row('1  101 102 103 104 105 106 107 108 109'.split())
@@ -93,6 +80,27 @@ class MyPostGrid(MDGridLayout):
         self.create_row('8  127 128 129 130 131 132 133 134 135'.split())
         self.create_row('9  134 135 136 137 140 141 142 143 144'.split())
         self.create_row('10 136 137 138 139 140 141 142 143 144'.split())
+        # XXX customize
+        for idx,grid in enumerate(reversed(self.children)):
+            #print(idx,grid.children[0].text)
+            post = self.get_post(idx)
+            dongs = get_dongsforpost(post)
+            print('==>post,dongs',post,dongs)
+            for button in reversed(grid.children):
+                if is_post(button.text):
+                    button.color = get_color(base.fg, 0.7)
+                    button.font_size = 18
+                    continue
+                if button.text in map(str,dongs):
+                    button.color = get_color(base.fg, 0.85)
+                    if find_ev1(button.text):
+                        button.color = get_color(base.fg1,0.7)
+                    if find_use_ev2(button.text):
+                        button.text += '*'
+                        #button.color = get_color(base.fg2, 0.8)
+                else:
+                    button.color = get_color(base.fg,0.4)
+                    button.bold = False
 
     def reset_grid(self,grid):
         grid.md_bg_color = 0,51/255,255/255,1
@@ -105,33 +113,12 @@ class MyPostGrid(MDGridLayout):
         # skip post 4   -> 1,2,3,5,6,7,8,9,10 
         return posts[idx]
 
-    def is_post(self,button):
-        if int(button.text) in posts:
-            return True
-        else:
-            return False
-
-    def update(self):
-        for idx,grid in enumerate(reversed(self.children)):
-            #print(idx,grid.children[0].text)
-            post = self.get_post(idx)
-            dongs = get_dongsforpost(post)
-            print('==>post,dongs',post,dongs)
-            for button in reversed(grid.children):
-                if self.is_post(button):
-                    button.color = get_color(base.fg, 0.7)
-                    continue
-                if button.text in map(str,dongs):
-                    button.color = get_color(base.fg, 0.85)
-                    if find_ev1(button.text):
-                        button.color = get_color(base.fg1,0.7)
-                    if find_use_ev2(button.text):
-                        button.text += '*'
-                        #button.color = get_color(base.fg2, 0.8)
-
-                else:
-                    button.color = get_color(base.fg,0.4)
-                    button.bold = False
+    def update(self,dong):
+        dong_index = find_dong(dong)
+        self.dong_list = dong_sedae_floor_post_ev[dong_index]
+        app = MDApp.get_running_app()
+        app.root.mainstatus.text = '   '.join(map(str,self.dong_list) )
+        print(self.dong_list)
 
 if __name__ == '__main__':
     Window.size = 1200,250

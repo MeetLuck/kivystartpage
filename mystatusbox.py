@@ -1,17 +1,10 @@
 from import_components import *
 
-#   StatusBox:
-#       MyLabel:
-#           id: id_status
-#           text: 'status bar'
-#           font_size: 20
-#           bold: True
 
 class StatusLabel(MyLabel):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.bold = True
-        #self.font_size = 16
 
 class SelectLabel(MyLabel):
     def __init__(self,**kwargs):
@@ -31,12 +24,12 @@ class StatusBox(MDBoxLayout):
         super().__init__(**kwargs)
         self.orientation='horizontal'
         self.spacing = 0
-        self.statusbox = MDBoxLayout(size_hint=(0.78,1))
-        self.selectbox = MDBoxLayout(size_hint=(0.12,1))
+        self.statusbox = MDBoxLayout(size_hint=(0.78,1) )
+        self.selectbox = MDBoxLayout(size_hint=(0.12,1) )
         self.timebox   = MDBoxLayout(size_hint=(0.1,1))
-        self.statuslabel = StatusLabel(text='', text_color= (0,1,0,1))
-        self.selectlabel = SelectLabel(text='', text_color =(0,1,1,1) )
-        self.timelabel   = TimeLabel(text='')
+        self.statuslabel = Label(text='',color=base.fg, font_name=base.font_name,font_size=16)
+        self.selectlabel = Label(text='',color=base.fg, font_name=base.font_name,font_size=16)
+        self.timelabel   = Label(text='',color=base.fg2,font_name=base.font_name,font_size=16)
         self.statusbox.add_widget(self.statuslabel)
         self.selectbox.add_widget(self.selectlabel)
         self.timebox.add_widget(self.timelabel)

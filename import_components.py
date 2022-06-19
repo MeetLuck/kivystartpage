@@ -59,7 +59,6 @@ class base:
     bg   = 0,0,0.12,1
     bg1  = 0, 50/255, 150/255,1
     bg2  = 0, 10/255, 60/255,1
-    #bg = 82/255, 82/255, 94/255,1
     black  = 0,0,0,1
     white  = 150/255, 170/255, 185/255, 1
     icon  = get_color(fg, 0.7) #150/255*0.6, 170/255*0.6, 185/255*0.6, 1
@@ -116,7 +115,7 @@ class MyLabel(MDLabel):
         #   text_color: 0, 0, 1, 1
         self.bind(size=self.setter('text_size'))    
 
-class B1(MDFlatButton):
+class B2(MDFlatButton):
     def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
         super().__init__(font_size=font_size,theme_text_color='Custom',line_color=(0,0,0,0),text_color=text_color,**kwargs)
         #self.background_normal = ''
@@ -135,16 +134,23 @@ class IB1(MDRectangleFlatIconButton,HoverBehavior):
         self.text_color = self.tmp
         #self.md_bg_color = self.theme_cls.bg_darkest
 
-class MyCalButton(Button):
-    def __init__(self,font_size=base.font_size,**kwargs):
-        super().__init__(font_size=base.font_size,**kwargs)
-        self.color = base.fg
-        self.background_normal = ''
-        self.background_color = 0,0,0,0
-        #self.font_name = 'NotoSerifKR'
-        #self.background_color = 0,16/255,38/255,1
-        self.font_name = 'GothicA1'
+class B1(Button,HoverBehavior):
+
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.font_name = 'NotoSerifKR'
         self.bold = True
+        self.color = base.fg #get_color(base.fg,0.6) #fg = 110/255,130/255,150/255,1
+        self.background_normal = ''
+        self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
+        self.font_size = 16
+
+    def on_enter(self, *args):
+        self.tmp = self.color 
+        self.color = (1,1,1,1)
+
+    def on_leave(self, *args):
+        self.color = self.tmp
 
 class MyEVButton(IB1):
     def __init__(self,**kwargs):
@@ -198,3 +204,4 @@ class MyMapButton(IB1):
         self.text_color = Color.map.fg
         self.icon_color = Color.map.icon
         #self.line_color = 0,1,0,1
+

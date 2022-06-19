@@ -31,11 +31,11 @@ class MoveInOutBox(MDBoxLayout):
 
     def create_layout(self):
         # create move-in,out button
-        self.movin      = MoveButton(text='전출입 및 승강기 현황',    icon='truck-outline',on_press=self.on_press)
-        self.interior   = MoveButton(text='세대공사',                 icon='tools',on_press=self.on_press)
-        self.donginfo   = MoveButton(text='동별 세대수 및 공동현관문',icon='home-city',on_press=self.on_press)
-        self.protectev  = MoveButton(text='보양재 현황',              icon='elevator-passenger-outline',on_press=self.on_press)
-        self.internoise = MoveButton(text='층간소음',                 icon='bullhorn-outline',on_press=self.on_press)
+        self.movin      = MoveButton(text='전출입 및 승강기 현황',    icon='circle-medium',on_press=self.on_press)
+        self.interior   = MoveButton(text='세대공사',                 icon='circle-medium',on_press=self.on_press)
+        self.donginfo   = MoveButton(text='동별 세대수 및 공동현관문',icon='circle-medium',on_press=self.on_press)
+        self.protectev  = MoveButton(text='보양재 현황',              icon='circle-medium',on_press=self.on_press)
+        self.internoise = MoveButton(text='층간소음',                 icon='circle-medium',on_press=self.on_press)
         self.add_widget(self.movin)
         self.add_widget(self.interior)
         self.add_widget(self.donginfo)

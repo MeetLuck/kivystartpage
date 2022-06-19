@@ -6,7 +6,7 @@ class MyNotiLabel2(MDLabel):
         self.font_name='NotoSerifKR'
         self.color = base.fg
         self.bold = False
-        self.font_size=16
+        self.font_size=15
         #self.size = self.texture_size
         #self.size_hint_x = None
         #self.width = 80
@@ -18,7 +18,7 @@ class MyNotiLabel(MDLabel):
         self.font_name='NotoSerifKR'
         self.color = base.fg
         self.bold = False
-        self.font_size=16
+        self.font_size=15
         self.size = self.texture_size
         #self.bind(size=self.setter('text_size'))    
 

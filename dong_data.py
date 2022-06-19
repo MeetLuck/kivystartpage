@@ -81,7 +81,11 @@ def find_must_ev2(dong):
         if dong in map(str,dong_record):
             return str( dong_record[4] ) 
     return ''
+# XXX alias for find_must_ev2
 find_use_ev2 = find_must_ev2
+
+def is_post(post:str):
+    return int(post) in posts
 
 def get_dongsforpost(post:int)->list:
     dongs = list()
