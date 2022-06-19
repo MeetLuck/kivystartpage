@@ -23,6 +23,8 @@ from kivymd.uix.snackbar import Snackbar
 from kivymd.uix.behaviors import RectangularElevationBehavior, FocusBehavior, HoverBehavior
 from kivymd.uix.dialog import MDDialog
 from kivy.uix.modalview import ModalView
+from kivymd.uix.textfield import MDTextField
+from kivy.uix.textinput import TextInput
 import calendar
 from datetime import datetime
 from os.path import dirname,join
