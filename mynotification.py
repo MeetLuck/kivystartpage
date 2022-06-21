@@ -74,7 +74,7 @@ class MyMonthlyReportGrid(MDGridLayout):
         monthly_date = datetime(adate.year,adate.month,20)
         if get_weekday(monthly_date)=='토': monthly_date = datetime(adate.year,adate.month,20-1)
         if get_weekday(monthly_date)=='일': monthly_date = datetime(adate.year,adate.month,20-2)
-        fg = Color.Dday.fg if monthly_date > today-timedelta(1) else Color.Dday.pas
+        fg = Color.Dday.fg if monthly_date > today-timedelta(1) else Color.Dday.past
         self.children[4].text = monthly_date.strftime('%m-%d') + r' ({}) '.format( get_workteam(monthly_date)[0] )
         self.children[4].color = fg
         print('updated monthlyreport days')

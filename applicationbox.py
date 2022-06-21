@@ -21,15 +21,18 @@ class ApplicationBox(MDBoxLayout):
 
     def create_layout(self):
         #print(minwonfile)
+        self.phone          =  AppButton(text='TEL',         icon='alpha-t-circle-outline',on_press=self.on_press)
         self.firefox        =  AppButton(text='firefox',     icon='alpha-f-circle-outline',on_press=self.on_press)
         self.paint          =  AppButton(text='mspaint',     icon='alpha-p-circle-outline',     on_press=self.on_press)
         self.snippingtool   =  AppButton(text='snippingtool',icon='alpha-s-circle-outline',on_press=self.on_press)
+        self.add_widget(self.phone)
         self.add_widget(self.firefox)
         self.add_widget(self.paint)
         self.add_widget(self.snippingtool)
 
     def on_press(self,btn):
         root = Path(__file__).parent
+        if btn == self.phone:           os.startfile('images/phonenumbers.png')
         if btn == self.firefox:         os.startfile('firefox')
         if btn == self.paint:           os.startfile('mspaint')
         if btn == self.snippingtool:    os.startfile('snippingtool')

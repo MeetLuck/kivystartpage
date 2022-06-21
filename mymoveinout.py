@@ -43,11 +43,11 @@ class MoveInOutBox(MDBoxLayout):
         self.add_widget(self.internoise)
 
     def on_press(self,btn):
-        if btn.text == '전출입 및 승강기 현황':     os.system( 'python {}'.format('moving_ev.py') )
-        if btn.text == '세대공사':                  os.system( 'python {}'.format('interior.py') )
-        if btn.text == '동별 세대수 및 공동현관문': os.system( 'python {}'.format('dong_information.py') )
-        if btn.text == '보양재 현황':               os.system( 'python {}'.format('boyang_information.py') )
-        if btn.text == '층간소음':                  os.system( 'python {}'.format('interfloor_noise.py') )
+        if btn.text == '전출입 및 승강기 현황':     os.system( 'start /b python {}'.format('moving_ev.py') )
+        if btn.text == '세대공사':                  os.system( 'start /b python {}'.format('interior.py') )
+        if btn.text == '동별 세대수 및 공동현관문': os.system( 'start /b python {}'.format('dong_information.py') )
+        if btn.text == '보양재 현황':               os.system( 'start /b python {}'.format('boyang_information.py') )
+        if btn.text == '층간소음':                  os.system( 'start /b python {}'.format('interfloor_noise.py') )
     def update(self):
         ...
 

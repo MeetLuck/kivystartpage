@@ -25,6 +25,7 @@ from kivymd.uix.dialog import MDDialog
 from kivy.uix.modalview import ModalView
 from kivymd.uix.textfield import MDTextField
 from kivy.uix.textinput import TextInput
+from kivy.uix.image import Image, AsyncImage
 import calendar
 from datetime import datetime
 from os.path import dirname,join
@@ -117,6 +118,16 @@ class MyLabel(MDLabel):
         #   text_color: 0, 0, 1, 1
         self.bind(size=self.setter('text_size'))    
 
+class L1(MDLabel):
+    def __init__(self,text_color = base.fg, bold = False, font_size=10, **kwargs):
+        super().__init__( text_color = text_color, bold = bold, font_size=font_size,**kwargs)
+        self.font_name = base.font_name
+        self.theme_text_color = "Custom"
+        #self.size = self.texture_size
+        self.pos_hint = 0.5,0.5
+        #   text_color: 0, 0, 1, 1
+        #self.bind(size=self.setter('text_size'))    
+
 class B2(MDFlatButton):
     def __init__(self,font_size=base.font_size,line_color=(0,0,0,0),text_color=base.fg,**kwargs):
         super().__init__(font_size=font_size,theme_text_color='Custom',line_color=(0,0,0,0),text_color=text_color,**kwargs)
@@ -138,14 +149,13 @@ class IB1(MDRectangleFlatIconButton,HoverBehavior):
 
 class B1(Button,HoverBehavior):
 
-    def __init__(self,**kwargs):
-        super().__init__(**kwargs)
+    def __init__(self,font_size=16,**kwargs):
+        super().__init__(font_size=font_size,**kwargs)
         self.font_name = 'NotoSerifKR'
         self.bold = True
         self.color = base.fg #get_color(base.fg,0.6) #fg = 110/255,130/255,150/255,1
         self.background_normal = ''
         self.background_color = 0,1,0,0 #self.background_color = Color.files.bg
-        self.font_size = 16
 
     def on_enter(self, *args):
         self.tmp = self.color 

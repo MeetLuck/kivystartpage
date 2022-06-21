@@ -12,34 +12,32 @@ class PhoneField(TextInput):
         self.font_size = 30
         self.bold = True
 
+
 class PhoneBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.orientation='vertical'
         self.spacing = 0
-        #self.root = MDApp.get_running_app().root
-        self.phonenumber = {50:'김규동: 010-8127-0040',51:'박종우:010-4746-8663'}
-        self.create_layout()
+        self.create_grid('50','김규동','60','김덕근')
+        self.create_grid('51','박종우','61','장희은')
+        self.create_grid('52','이종화','62','문완수')
+        self.create_grid('53','이현석','63','우창래')
+        self.create_grid('54','이대진','64','최서우')
+        self.create_grid('55','정찬선','65','허 명 ')
+        self.create_grid('56','김인호','66','이한우')
+        self.create_grid('57','김광영','67','이시철')
+        self.create_grid('58','정경호','59','원형준')
+        #phonenumbers = AsyncImage(source='images/phonenumbers.png')
+        #phonenumbers.size = phonenumbers.texture_size 
+        #self.add_widget(phonenumbers)
+    def create_grid(self,tel1,name1,tel2,name2):
+        grid = MDGridLayout(cols=4,line_color=get_color(base.fg,0.5) )
+        grid.add_widget( B1(text=tel1) )
+        grid.add_widget( L1(text=name1,font_size=12,text_color=get_color(base.fg,0.8)))
+        grid.add_widget( B1(text=tel2) )
+        grid.add_widget( L1(text=name2,font_size=12,text_color=get_color(base.fg,0.8)))
+        self.add_widget(grid)
 
-    def create_layout(self):
-        self.phoneinput = PhoneField()
-        self.phoneinput.bind(text=self.on_text)
-        self.add_widget(self.phoneinput)
-        print(self.phoneinput)
-
-    def on_text(self,textinput, value):
-        if len(value) == 0:
-            print(self.phonenumber)
-        elif len(value) == 1:
-            if value.startswith('5'):
-                print(self.phonenumber)
-            else:
-                print('unknown phonenumber')
-        elif len(value) == 2:
-            if value.startswith('5'):
-                print(self.phonenumber[int(value)])
-        else:
-            print('unknown number')
 
 
 if __name__ == '__main__':

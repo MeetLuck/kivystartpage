@@ -15,7 +15,7 @@ from mypostgrid import *
 from myphonebox import *
 import time
 
-Window.size = 1250,900
+Window.size = 1250,950
 Window.top = 80
 Window.left = 350
 #Window.borderless = True
@@ -57,6 +57,7 @@ class MyStartBox(MDBoxLayout):
         if keycode[1] == 'f':    os.startfile('firefox')
         if keycode[1] == 'p':    os.startfile('mspaint')
         if keycode[1] == 's':    os.startfile('snippingtool')
+        if keycode[1] == 't':    os.startfile(Path('./images/phonenumbers.png') )
 
     def key_down(self,keyboard, keycode, text, modifiers):
         # (49, '1')
@@ -72,6 +73,7 @@ class MyStartBox(MDBoxLayout):
         if keycode[1] == 'f':    self.mainstatus.text = f'loading firefox'
         if keycode[1] == 'p':    self.mainstatus.text = f'loading paint'
         if keycode[1] == 's':    self.mainstatus.text = f'loading snippingtool'
+        if keycode[1] == 't':    self.mainstatus.text = f'loading phonenumber'
 
     def update_date(self,date:tuple):
         self.date = datetime(*date )
