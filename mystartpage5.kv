@@ -60,36 +60,28 @@
 
 <MyFilesBox>:
     orientation: 'vertical'
-    size_hint: 1,0.4
+    size_hint: 1,0.2
     line_color: 0.2,0.2,0.2,1
-    #pos_hint:{'center_x':0.5, 'center_y':0.45}
-    padding: 5
     #md_bg_color: 0,0.2,0,1
 
-<MyFoldersGrid>:
-    size_hint: 1,0.23
-    #pos_hint:{'center_x':0.5, 'center_y':0.75}
+<MyCmdsBox>:
+    orientation: 'vertical'
+    size_hint: 1,0.25
     line_color: 0.2,0.2,0.2,1
-    padding: 2
-    spacing: 0
+    #md_bg_color: 0,0.2,0,1
+
+<MyFoldersBox>:
+    size_hint: 1,0.25
+    pos_hint:{'center_x':0.5, 'center_y':0.5}
+    line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0,0,0.2,1
 
 <MyServicesBox>:
     #orientation: 'vertical'
-    size_hint: 1,0.2
-    #pos_hint:{'center_x':0.5, 'center_y':0.5}
-    line_color: 0.2,0.2,0.2,1
-    padding : 5
-    #md_bg_color: 0.2,0,0,1
-
-<MySearchBox@MDBoxLayout>:
-    #orientation: 'vertical'
-    size_hint: 1,0.17
-    #pos_hint:{'center_x':0.5, 'center_y':0.5}
+    size_hint: 1,0.25
+    pos_hint:{'center_x':0.5, 'center_y':0.5}
     line_color: 0.2,0.2,0.2,1
     #md_bg_color: 0.2,0,0,1
-    spacing: 0
-
 
 <MyWeeklyReportGrid>:
     pos_hint:{'center_x':0.47, 'center_y':0.5}
@@ -171,9 +163,10 @@
         TopRightBox: # Top Right Box
             MyFilesBox:
                 id: id_myfilesbox
-            MyFoldersGrid:
+            MyCmdsBox:
+                id: id_mycmdsbox
+            MyFoldersBox:
             MyServicesBox:
-            MySearchBox:
         
     NotificationBox: # Bottom Box
         MyWeeklyReportGrid: 

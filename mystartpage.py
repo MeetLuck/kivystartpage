@@ -2,7 +2,7 @@ from import_components import *
 from mycal.mycalendar import MyCalendar
 from myoffworkers import *
 from myfilesbox import *
-from mycmdsbox  import *
+#from mycmdsbox  import *
 from myfoldersbox import *
 from myservicesbox import *
 from mynotification import *
@@ -15,10 +15,6 @@ from mypostgrid import *
 from myphonebox import *
 import time
 
-Window.size = 1250,950
-Window.top = 80
-Window.left = 350
-#Window.borderless = True
 
 class MyStartBox(MDBoxLayout):
     def __init__(self,**kwargs):
@@ -96,6 +92,10 @@ class MyStartBox(MDBoxLayout):
 class Mystartpage(MDApp):
 
     def build(self):
+        Window.size = 1250,950
+        Window.top = 80
+        Window.left = 350
+        #Window.borderless = True
         Window.clearcolor = 0,16/255,38/255,1
         self.root = MyStartBox()
     def on_start(self):

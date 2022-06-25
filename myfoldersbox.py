@@ -1,12 +1,12 @@
 from import_components import *
 
-class MyFoldersBox(MDGridLayout):
+class MyFoldersGrid(MDGridLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
         self.cols = 3
         self.rows = 4
         self.padding = 0,0,0,0
-        self.spacing = 5,0
+        #self.spacing = 5,0
         #self.root = MDApp.get_running_app().root
         self.create_layout()
 
