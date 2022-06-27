@@ -100,6 +100,7 @@ class Mystartpage(MDApp):
         self.root = MyStartBox()
     def on_start(self):
         print('=============>>>>>>>on_start')
+        #Clock.schedule_interval(self.root.update_time, 1) # seconds
         Clock.schedule_interval(self.root.update_time, 30) # seconds
 
 Mystartpage().run()

@@ -17,7 +17,6 @@ class patrolG(MDGridLayout):
         self.background_normal=''
         self.md_bg_color = 0,0,0,0
 
-
 class MyPatrolBox(MDBoxLayout):
     def __init__(self,**kwargs):
         super().__init__(**kwargs)
@@ -61,6 +60,7 @@ class MyPatrolBox(MDBoxLayout):
     def update(self):
         # 24 or 12 am,pm
         hour = datetime.now().hour
+        print(hour)
         for grid in reversed(self.children):
             patrol_time = int( list(reversed(grid.children))[0].text )
             if patrol_time == 24: patrol_time = 0
