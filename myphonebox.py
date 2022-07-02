@@ -18,12 +18,12 @@ class PhoneBox(MDBoxLayout):
         super().__init__(**kwargs)
         self.orientation='vertical'
         self.spacing = 0
-        self.create_grid('50','김규동','60','김덕근')
+        self.create_grid('50','이재진','60','김덕근')
         self.create_grid('51','박종우','61','장희은')
         self.create_grid('52','이종화','62','문완수')
-        self.create_grid('53','이현석','63','우창래')
+        self.create_grid('53','',      '63','정찬선')
         self.create_grid('54','이대진','64','최서우')
-        self.create_grid('55','정찬선','65','허 명 ')
+        self.create_grid('55','박은호','65','허 명 ')
         self.create_grid('56','김인호','66','이한우')
         self.create_grid('57','김광영','67','이시철')
         self.create_grid('58','정경호','59','원형준')
